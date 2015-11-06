@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "NoComment",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "Hide comment sections across the web (Social Media, News Articles, Blogs etc).",
+    "description": "The description of the application"
+  }
+}

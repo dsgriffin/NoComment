@@ -1,0 +1,12 @@
+.idea/
+
+node_modules
+temp
+.tmp
+dist
+.sass-cache
+bower_components
+package
+app/scripts/*.js
+app/scripts/*.map
+

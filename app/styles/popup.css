@@ -1,0 +1,15 @@
+html {
+  background-color:#F2F2F2;
+}
+
+body {
+  background-color:white;
+  border: #88B7DA 2px solid;
+  border-radius: 6px;
+  font-family:'Segoe UI', Tahoma, sans-serif;
+  font-size:12px;
+  height:180px;
+  padding: 0 5px 0 5px;
+  text-align:center;
+  width:220px;
+}

@@ -1,0 +1,127 @@
+html {
+  background-color: #F2F2F2;
+  width: 600px;
+}
+
+body {
+  background-color: #FFFFFF;
+  border: #88B7DA 2px solid;
+  border-radius: 20px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 75%;
+  margin: 5px;
+  padding: 2% 6% 2% 4%;
+  text-align: left;
+  width: 88%;
+}
+
+/* Accordion */
+.ui-accordion {
+  width: 87%;
+}
+
+#optionsHeader {
+  text-align:center;
+}
+
+#optionsHeader img {
+  width: 115px;
+}
+
+#optionsFooter {
+  padding-top:3%;
+  text-align:center;
+}
+
+button.changeSettings {
+  display: block;
+  margin-top: 2%;
+}
+
+#tabs-1 section {
+  padding: 1%;
+  text-align: center;
+}
+
+#tabs-1 input[type="radio"] {
+  display:none;
+}
+
+#tabs-1 label {
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+#tabs-3 ul li {
+  margin: 10px 0;
+}
+
+#tabs-3 section {
+  margin: 20px 0;
+}
+
+section.listButtons {
+  padding:2%;
+  text-align:center;
+}
+
+section.listButtonsSubmit {
+  padding-bottom:1%;
+  text-align:center;
+}
+
+.notification {
+  color:red;
+  text-align:center;
+}
+
+.notification-alert {
+  color:red;
+  display:none;
+  text-align:center;
+}
+
+.userlist {
+  padding-top:20px;
+}
+
+.pattern-syntax-list {
+  height:120px;
+  overflow:hidden;
+  overflow-y:scroll;
+}
+
+/* Vertical Tabs Layout - includes jQuery UI overrides */
+
+.ui-tabs-vertical .ui-widget-header {
+    background-position: top center;
+}
+
+.ui-tabs-vertical .ui-tabs-nav {
+    padding: 4px !important;
+    width: 98%;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li {
+    border-bottom-width: 1px !important;
+    border-radius: 5px;
+    border-right-width: 0 !important;
+    margin: 0 -1px .2em 20% !important;
+    width: 60%;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li a {
+    display:block;
+    text-align:center;
+    width: 93%;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
+    border-right-width: 1px;
+    padding-bottom: 0;
+    padding-right: .1em;
+}
+
+.ui-tabs-vertical .ui-tabs-panel {
+    padding: 1em;
+}
