@@ -29,9 +29,17 @@ http://chrome.google.com/webstore/detail/nocomment/bcaffknecaohmingfdfimlbllnebp
 
 # Quickstart
 
-* Clone repo
-* ```npm install```
-* ```grunt build```
+After cloning the repo,
+
+```npm install```
+
+```grunt copy```
+
+The latter will generate a ```test/libs``` folder with a mocha/chai/phantomjs setup ready to use.
+
+Finally, when you're done with a feature/commit, use
+
+```grunt build```
 
 This will generate a ```/dist``` folder with all compiled sources, an increased version number etc.
 

@@ -30,10 +30,6 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      bower: {
-        files: ['bower.json'],
-        tasks: ['bowerInstall']
-      },
       js: {
         files: ['<%= config.srcScript %>/{,*/}*.js'],
         tasks: ['jshint', 'babel'],
@@ -144,15 +140,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Automatically inject Bower components into the HTML file
-    bowerInstall: {
-      app: {
-        src: [
-          '<%= config.app %>/*.html'
-        ]
-      }
-    },
-
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
@@ -247,23 +234,32 @@ module.exports = function (grunt) {
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%= config.app %>',
-          dest: '<%= config.dist %>',
-          src: [
-            '*.{ico,png,txt}',
-            'images/{,*/}*.{webp,gif}',
-            'libs/{,*/}*',
-            'libs/{,*/}*/{,*/}*',
-            'scripts/{,*/}*.js',
-            '{,*/}*.html',
-            'styles/{,*/}*.css',
-            'styles/fonts/{,*/}*.*',
-            '_locales/{,*/}*.json'
-          ]
-        }]
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: '<%= config.app %>',
+            dest: '<%= config.dist %>',
+            src: [
+              '*.{ico,png,txt}',
+              'images/{,*/}*.{webp,gif}',
+              'libs/{,*/}*',
+              'libs/{,*/}*/{,*/}*',
+              'scripts/{,*/}*.js',
+              '{,*/}*.html',
+              'styles/{,*/}*.css',
+              'styles/fonts/{,*/}*.*',
+              '_locales/{,*/}*.json'
+            ]
+          },
+          {
+            expand: true,
+            dot: true,
+            cwd: 'node_modules/',
+            src: ['chai/**', 'mocha/**'],
+            dest: 'test/libs/'
+          }
+        ]
       }
     },
 
