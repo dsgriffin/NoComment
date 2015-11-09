@@ -44,7 +44,7 @@ button.changeSettings {
 }
 
 #tabs-1 input[type="radio"] {
-  display:none;
+  display: none;
 }
 
 #tabs-1 label {
@@ -61,67 +61,67 @@ button.changeSettings {
 }
 
 section.listButtons {
-  padding:2%;
-  text-align:center;
+  padding: 2%;
+  text-align: center;
 }
 
 section.listButtonsSubmit {
-  padding-bottom:1%;
-  text-align:center;
+  padding-bottom: 1%;
+  text-align: center;
 }
 
 .notification {
-  color:red;
-  text-align:center;
+  color: red;
+  text-align: center;
 }
 
 .notification-alert {
-  color:red;
-  display:none;
-  text-align:center;
+  color: red;
+  display: none;
+  text-align: center;
 }
 
 .userlist {
-  padding-top:20px;
+  padding-top: 20px;
 }
 
 .pattern-syntax-list {
-  height:120px;
-  overflow:hidden;
-  overflow-y:scroll;
+  height: 120px;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 /* Vertical Tabs Layout - includes jQuery UI overrides */
 
 .ui-tabs-vertical .ui-widget-header {
-    background-position: top center;
+  background-position: top center;
 }
 
 .ui-tabs-vertical .ui-tabs-nav {
-    padding: 4px !important;
-    width: 98%;
+  padding: 4px !important;
+  width: 98%;
 }
 
 .ui-tabs-vertical .ui-tabs-nav li {
-    border-bottom-width: 1px !important;
-    border-radius: 5px;
-    border-right-width: 0 !important;
-    margin: 0 -1px .2em 20% !important;
-    width: 60%;
+  border-bottom-width: 1px !important;
+  border-radius: 5px;
+  border-right-width: 0 !important;
+  margin: 0 -1px .2em 20% !important;
+  width: 60%;
 }
 
 .ui-tabs-vertical .ui-tabs-nav li a {
-    display:block;
-    text-align:center;
-    width: 93%;
+  display: block;
+  text-align: center;
+  width: 93%;
 }
 
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
-    border-right-width: 1px;
-    padding-bottom: 0;
-    padding-right: .1em;
+  border-right-width: 1px;
+  padding-bottom: 0;
+  padding-right: .1em;
 }
 
 .ui-tabs-vertical .ui-tabs-panel {
-    padding: 1em;
+  padding: 1em;
 }
