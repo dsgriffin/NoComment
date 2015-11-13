@@ -153,36 +153,13 @@ module.exports = function (grunt) {
       ]
     },
 
-    // Performs rewrites based on rev and the useminPrepare configuration
+    // Performs rewrites based on rev and the usemin prepare configuration
     usemin: {
       options: {
         assetsDirs: ['<%= config.dist %>', '<%= config.dist %>/images']
       },
       html: ['<%= config.dist %>/{,*/}*.html'],
       css: ['<%= config.dist %>/styles/{,*/}*.css']
-    },
-
-    // The following *-min tasks produce minifies files in the dist folder
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>/images',
-          src: '{,*/}*.{gif,jpeg,jpg,png}',
-          dest: '<%= config.dist %>/images'
-        }]
-      }
-    },
-
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= config.dist %>/images'
-        }]
-      }
     },
 
     htmlmin: {
@@ -218,21 +195,32 @@ module.exports = function (grunt) {
          }
        }
      },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/scripts/scripts.js': [
-    //         '<%= config.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
+
+     //uglify: {
+     //  dist: {
+     //    files: {
+     //      expand: true,
+     //      cwd: '<%= config.app %>/scripts',
+     //      src: ['*.js'],
+     //      dest: '<%= config.app %>/scripts',
+     //      ext: '.min.js'
+     //    }
+     //  }
+     //},
 
     // Copies remaining files to places other tasks can use
     copy: {
+      test: {
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: 'node_modules/',
+            src: ['chai/chai.js', 'mocha/mocha.js'],
+            dest: 'test/libs/'
+          }
+        ]
+      },
       dist: {
         files: [
           {
@@ -241,38 +229,17 @@ module.exports = function (grunt) {
             cwd: '<%= config.app %>',
             dest: '<%= config.dist %>',
             src: [
-              '*.{ico,png,txt}',
-              'images/{,*/}*.{webp,gif}',
+              'images/{,*/}',
               'libs/{,*/}*',
               'libs/{,*/}*/{,*/}*',
               'scripts/{,*/}*.js',
               '{,*/}*.html',
               'styles/{,*/}*.css',
-              'styles/fonts/{,*/}*.*',
               '_locales/{,*/}*.json'
             ]
-          },
-          {
-            expand: true,
-            dot: true,
-            cwd: 'node_modules/',
-            src: ['chai/**', 'mocha/**'],
-            dest: 'test/libs/'
           }
         ]
       }
-    },
-
-    // Run some tasks in parallel to speed up build process
-    concurrent: {
-      chrome: [
-      ],
-      dist: [
-        'imagemin',
-        'svgmin'
-      ],
-      test: [
-      ]
     },
 
     // Auto buildnumber, exclude debug files. smart builds that event pages
@@ -316,13 +283,13 @@ module.exports = function (grunt) {
     grunt.task.run([
       'jshint',
       'babel',
-      'concurrent:chrome',
       'connect:chrome',
       'watch'
     ]);
   });
 
   grunt.registerTask('test', [
+    'copy:test',
     'connect:test',
     'mocha'
   ]);
@@ -331,12 +298,12 @@ module.exports = function (grunt) {
     'clean:dist',
     'babel',
     'chromeManifest:dist',
+    'test',
     'useminPrepare',
-    'concurrent:dist',
     'cssmin',
     'concat',
     'uglify',
-    'copy',
+    'copy:dist',
     'usemin',
     'compress'
   ]);
