@@ -2,11 +2,11 @@
 A Chrome extension for hiding comment sections across the web (Social Media, News Articles, Blogs etc).
 
 # Features
-* Users can choose whether to hide all comments (except those on URLs/URL patterns specified in the whitelist) or show all by default (hiding those on URLs/URL patterns specified in the Block List).
+* Users can choose whether to hide all comments (except those on URLs/URL patterns specified in the Allow List) or show all by default (hiding those on URLs/URL patterns specified in the Block List).
 
 **Default Setting**: hide all comments.  
 
-* User can select how they want this to look visually - ```collapsed``` which removes all space usually taken up, ```hidden``` which hides all comments but keeps the space they'd usually take up, or ```image``` which simply places the NoComment logo over every comment. 
+* User can select how they want this to look visually - either `collapsed` which completely removes all the space usually taken up or `visibility hidden` which keeps the space they'd usually take up.
 
 **Default Setting**: collapsed.
 
@@ -23,25 +23,21 @@ http://chrome.google.com/webstore/detail/nocomment/bcaffknecaohmingfdfimlbllnebp
 **Github:**
 
 * Download/Clone repo
-* Go to the Chrome extensions page (either via ```chrome://extensions/``` or the ```Chrome Settings Tab > More Tools > Extensions```
+* Go to the Chrome extensions page (either via `chrome://extensions/` or the `Chrome Settings Tab > More Tools > Extensions`
 * Make sure the Developer Mode checkbox is ticked
 * Load it as an unpacked extension
 
 # Quickstart
 
-After cloning the repo,
+After cloning the repo simply `npm install`
 
-```npm install```
+To test use ```grunt test```
 
-```grunt copy```
+Finally, when you're done with a feature/commit, use `grunt build`
 
-The latter will generate a ```test/libs``` folder with a mocha/chai/phantomjs setup ready to use.
+This will generate `/dist` + `/package` folders with all compiled sources, an increased version number etc. 
 
-Finally, when you're done with a feature/commit, use
-
-```grunt build```
-
-This will generate a ```/dist``` folder with all compiled sources, an increased version number etc.
+If you've built multiple times before pushing, please rollback the `version` in `app/manifest.json` to the same version number on this repo as it'll save me the hassle when uploading, thanks!
 
 # Contributing
 

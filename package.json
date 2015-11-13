@@ -1,6 +1,7 @@
 {
   "name": "nocomment",
   "private": true,
+  "author": "Daniel Griffin",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -14,11 +15,9 @@
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-htmlmin": "~0.4.0",
     "grunt-bower-install": "~1.6.0",
-    "grunt-contrib-imagemin": "~0.9.4",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-usemin": "~3.1.1",
     "grunt-mocha": "~0.4.13",
-    "grunt-svgmin": "~2.0.1",
     "grunt-concurrent": "~2.0.3",
     "jit-grunt": "^0.9.1",
     "time-grunt": "~1.2.1",
@@ -29,6 +28,6 @@
     "mocha": "~2.3.3"
   },
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">=4.0.0"
   }
 }
