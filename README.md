@@ -23,7 +23,7 @@ A Chrome extension for hiding comment sections across the web (Social Media, New
 
 http://chrome.google.com/webstore/detail/nocomment/bcaffknecaohmingfdfimlbllnebpepe
 
-**Github:**
+**Github/Gitlab:**
 
 * Download/Clone repo
 * Go to the Chrome extensions page (either via `chrome://extensions/` or the `Chrome Settings Tab > More Tools > Extensions`
