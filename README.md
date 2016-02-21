@@ -1,4 +1,4 @@
-# NoComment
+# NoComment ![logo](https://github.com/dsgriffin/NoComment/raw/master/app/images/favicon.png)
 
 [![Build Status](https://travis-ci.org/dsgriffin/NoComment.svg?branch=master)](https://travis-ci.org/dsgriffin/NoComment)
 
