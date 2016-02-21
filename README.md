@@ -1,6 +1,6 @@
-# NoComment ![logo](https://github.com/dsgriffin/NoComment/raw/master/app/images/favicon.png)
+# NoComment [![Build Status](https://travis-ci.org/dsgriffin/NoComment.svg?branch=master)](https://travis-ci.org/dsgriffin/NoComment)
 
-[![Build Status](https://travis-ci.org/dsgriffin/NoComment.svg?branch=master)](https://travis-ci.org/dsgriffin/NoComment)
+![logo](https://github.com/dsgriffin/NoComment/raw/master/app/images/icon-128.png)
 
 A Chrome extension for hiding comment sections across the web (Social Media, News Articles, Blogs etc).
 
