@@ -1,11 +1,5 @@
 'use strict';
 
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
-
 module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
@@ -20,7 +14,7 @@ module.exports = function (grunt) {
   var config = {
     app: 'app',
     dist: 'dist',
-    srcScript: '<%= config.app %>/scripts.babel'
+    srcScript: '<%= config.app %>/scripts'
   };
 
   grunt.initConfig({
@@ -32,7 +26,7 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['<%= config.srcScript %>/{,*/}*.js'],
-        tasks: ['jshint', 'babel'],
+        tasks: 'babel',
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -62,15 +56,12 @@ module.exports = function (grunt) {
 
     // Compiles ES6 with Babel
     babel: {
-      options: {
-        sourceMap: true
-      },
       dist: {
         files: [{
           expand: true,
           cwd: '<%= config.srcScript %>',
           src: '{,*/}*.js',
-          dest: '<%= config.app %>/scripts',
+          dest: '<%= config.dist %>/scripts',
           ext: '.js'
         }]
       }
@@ -105,8 +96,6 @@ module.exports = function (grunt) {
 
     // Empties folders to start fresh
     clean: {
-      chrome: {
-      },
       dist: {
         files: [{
           dot: true,
@@ -115,28 +104,6 @@ module.exports = function (grunt) {
             '!<%= config.dist %>/.git*'
           ]
         }]
-      }
-    },
-
-    // Make sure code styles are up to par and there are no obvious mistakes
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      all: [
-        'Gruntfile.js',
-        '<%= config.srcScript %>/{,*/}*.js',
-        '!<%= config.app %>/scripts/vendor/*',
-        'test/spec/{,*/}*.js'
-      ]
-    },
-    mocha: {
-      all: {
-        options: {
-          run: true,
-          urls: ['http://localhost:<%= connect.options.port %>/index.html']
-        }
       }
     },
 
@@ -162,27 +129,6 @@ module.exports = function (grunt) {
       css: ['<%= config.dist %>/styles/{,*/}*.css']
     },
 
-    htmlmin: {
-      dist: {
-        options: {
-          // removeCommentsFromCDATA: true,
-          // collapseWhitespace: true,
-          // collapseBooleanAttributes: true,
-          // removeAttributeQuotes: true,
-          // removeRedundantAttributes: true,
-          // useShortDoctype: true,
-          // removeEmptyAttributes: true,
-          // removeOptionalTags: true
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>',
-          src: '*.html',
-          dest: '<%= config.dist %>'
-        }]
-      }
-    },
-
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
     // to use the Usemin blocks.
@@ -196,31 +142,8 @@ module.exports = function (grunt) {
        }
      },
 
-     //uglify: {
-     //  dist: {
-     //    files: {
-     //      expand: true,
-     //      cwd: '<%= config.app %>/scripts',
-     //      src: ['*.js'],
-     //      dest: '<%= config.app %>/scripts',
-     //      ext: '.min.js'
-     //    }
-     //  }
-     //},
-
     // Copies remaining files to places other tasks can use
     copy: {
-      test: {
-        files: [
-          {
-            expand: true,
-            dot: true,
-            cwd: 'node_modules/',
-            src: ['chai/chai.js', 'mocha/mocha.js'],
-            dest: 'test/libs/'
-          }
-        ]
-      },
       dist: {
         files: [
           {
@@ -235,7 +158,8 @@ module.exports = function (grunt) {
               'scripts/{,*/}*.js',
               '{,*/}*.html',
               'styles/{,*/}*.css',
-              '_locales/{,*/}*.json'
+              '_locales/{,*/}*.json',
+              'manifest.json'
             ]
           }
         ]
@@ -279,38 +203,22 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('debug', function () {
-    grunt.task.run([
-      'jshint',
-      'babel',
-      'connect:chrome',
-      'watch'
-    ]);
-  });
-
-  grunt.registerTask('test', [
-    'copy:test',
-    'connect:test',
-    'mocha'
-  ]);
-
   grunt.registerTask('build', [
     'clean:dist',
     'babel',
-    'chromeManifest:dist',
-    'test',
     'useminPrepare',
     'cssmin',
-    'concat',
-    'uglify',
     'copy:dist',
     'usemin',
     'compress'
   ]);
 
+  grunt.registerTask('release', [
+    'chromeManifest:dist',
+    'build'
+  ]);
+
   grunt.registerTask('default', [
-    'jshint',
-    'test',
     'build'
   ]);
 };

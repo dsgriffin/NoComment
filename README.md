@@ -1,4 +1,4 @@
-# NoComment [![Build Status](https://travis-ci.org/dsgriffin/NoComment.svg?branch=master)](https://travis-ci.org/dsgriffin/NoComment)
+# NoComment
 
 ![logo](https://github.com/dsgriffin/NoComment/raw/master/app/images/icon-128.png)
 
@@ -48,4 +48,4 @@ Check the "issues" tab. If you'd like to add any kind of improvement, I would be
 
 # License
 
-GNU
+MIT (see license.txt)
