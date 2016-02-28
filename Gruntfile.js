@@ -78,6 +78,9 @@ module.exports = function (grunt) {
 
     uglify: {
       dist: {
+        options: {
+          mangle: false
+        },
         files: [{
           expand: true,
           cwd: '<%= config.dist %>/scripts',
