@@ -1,46 +1,41 @@
-# NoComment [![Build Status](https://travis-ci.org/dsgriffin/NoComment.svg?branch=master)](https://travis-ci.org/dsgriffin/NoComment)
+# NoComment
 
 ![logo](https://github.com/dsgriffin/NoComment/raw/master/app/images/icon-128.png)
 
 A Chrome extension for hiding comment sections across the web (Social Media, News Articles, Blogs etc).
 
 # Features
-* Users can choose whether to hide all comments (except those on URLs/URL patterns specified in the Allow List) or show all by default (hiding only the URLs/URL patterns specified in the Block List).
+* Users can choose whether to `hide all` comments (except those on URLs/URL patterns specified in the Allow List) or `show all` by default (hiding only the URLs/URL patterns specified in the Block List). **Default**: `hide all`  
 
-**Default Setting**: `hide all`  
+* Users can select how they want this to visually look - either `collapsed` (`display: none`) which completely removes the space usually taken or `hidden` (`visibility: hidden`) which keeps the space the comment section would usually take up. **Default**: `collapsed`
 
-* Users can select how they want this to visually look - either collapsed (`display: none`) which completely removes the space usually taken or hidden (`visibility: hidden`) which keeps the space the comment section would usually take up.
+* An Allow List and Block List, where users can define URLs/URL patterns they want to allow or block respectively. **Default**: `empty lists`
 
-**Default Setting**: `collapsed`
-
-* An Allow List and Block List, where users can define URLs/URL patterns they want to allow or block respectively.  
-
-**Default Setting**: `empty`
-
-# Installation
-
-**Chrome Web Store**:
+# Try it out
 
 http://chrome.google.com/webstore/detail/nocomment/bcaffknecaohmingfdfimlbllnebpepe
 
-**Github/Gitlab:**
+(Please feel free to rate/provide constructive feedback/share etc)
 
-* Download/Clone repo
-* Go to the Chrome extensions page (either via `chrome://extensions/` or the `Chrome Settings Tab > More Tools > Extensions`
-* Make sure the Developer Mode checkbox is ticked
-* Load it as an unpacked extension
+# Build/Test
 
-# Quickstart
+**Build**
 
-After cloning the repo simply run `npm install`
+* Clone repo and run `npm install`
+* Run `grunt build` to build the `dist` folder 
+* Run `grunt watch` for your changes in `app` to be tracked and to appear in `dist`
 
-To test use ```grunt test```
+**Test**
 
-Finally, when you're done with a feature/commit, use `grunt build`
+* Go to the Chrome extensions page (either via `chrome://extensions/` or the `Chrome Settings Tab > More Tools > Extensions`)
+* Make sure the `Developer Mode` checkbox is ticked
+* Load the `dist` folder as an unpacked extension
 
-This will generate `/dist` + `/package` folders with all compiled sources, an increased version number etc. 
+**Release**
 
-If you've used `grunt build` multiple times before pushing, please rollback the `version` in `app/manifest.json` to one above the version number on this repo (e.g. if it's `1.7.6` then make sure it's `1.7.7`) as it'll save me the hassle when uploading, thanks!
+* When you're finished coding/testing your changes, run `grunt release` which will update the version number (in `app`, `dist` and `package`) and will replace the `zip` inside `package` with the new version of NoComment (which will then be uploaded to the Chrome Web Store by myself).
+  
+P.S: If you accidentally mess up the release, you can just delete the `dist` + `package` folders and rollback the `version` in `app/manifest.json` :) 
 
 # Contributing
 
@@ -48,4 +43,4 @@ Check the "issues" tab. If you'd like to add any kind of improvement, I would be
 
 # License
 
-GNU
+NoComment is licensed under the [MIT](LICENSE.txt) license.

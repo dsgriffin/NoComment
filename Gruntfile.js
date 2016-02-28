@@ -1,26 +1,18 @@
 'use strict';
 
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
-
 module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
-  // Automatically load required Grunt tasks
-  require('jit-grunt')(grunt, {
-    useminPrepare: 'grunt-usemin'
-  });
+  // load all grunt-related tasks together instead of one-by-one
+  require('load-grunt-tasks')(grunt);
 
   // Configurable paths
   var config = {
     app: 'app',
     dist: 'dist',
-    srcScript: '<%= config.app %>/scripts.babel'
+    srcScript: '<%= config.app %>/scripts'
   };
 
   grunt.initConfig({
@@ -32,195 +24,37 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['<%= config.srcScript %>/{,*/}*.js'],
-        tasks: ['jshint', 'babel'],
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        }
+        tasks: 'babel'
       },
       gruntfile: {
         files: ['Gruntfile.js']
       },
       styles: {
         files: ['<%= config.app %>/styles/{,*/}*.css'],
-        tasks: [],
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        }
-      },
-      livereload: {
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        },
-        files: [
-          '<%= config.app %>/*.html',
-          '<%= config.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= config.app %>/manifest.json',
-          '<%= config.app %>/_locales/{,*/}*.json'
-        ]
+        tasks: []
       }
     },
 
     // Compiles ES6 with Babel
     babel: {
-      options: {
-        sourceMap: true
-      },
       dist: {
         files: [{
           expand: true,
           cwd: '<%= config.srcScript %>',
           src: '{,*/}*.js',
-          dest: '<%= config.app %>/scripts',
+          dest: '<%= config.dist %>/scripts',
           ext: '.js'
         }]
       }
     },
 
-    // Grunt server and debug server setting
-    connect: {
-      options: {
-        port: 9000,
-        livereload: 35729,
-        // change this to '0.0.0.0' to access the server from outside
-        hostname: 'localhost'
-      },
-      chrome: {
-        options: {
-          open: false,
-          base: [
-            '<%= config.app %>'
-          ]
-        }
-      },
-      test: {
-        options: {
-          open: false,
-          base: [
-            'test',
-            '<%= config.app %>'
-          ]
-        }
-      }
-    },
-
     // Empties folders to start fresh
     clean: {
-      chrome: {
-      },
-      dist: {
-        files: [{
-          dot: true,
-          src: [
-            '<%= config.dist %>/*',
-            '!<%= config.dist %>/.git*'
-          ]
-        }]
-      }
+      release: ['package']
     },
-
-    // Make sure code styles are up to par and there are no obvious mistakes
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      all: [
-        'Gruntfile.js',
-        '<%= config.srcScript %>/{,*/}*.js',
-        '!<%= config.app %>/scripts/vendor/*',
-        'test/spec/{,*/}*.js'
-      ]
-    },
-    mocha: {
-      all: {
-        options: {
-          run: true,
-          urls: ['http://localhost:<%= connect.options.port %>/index.html']
-        }
-      }
-    },
-
-    // Reads HTML for usemin blocks to enable smart builds that automatically
-    // concat, minify and revision files. Creates configurations in memory so
-    // additional tasks can operate on them
-    useminPrepare: {
-      options: {
-        dest: '<%= config.dist %>'
-      },
-      html: [
-        '<%= config.app %>/popup.html',
-        '<%= config.app %>/options.html'
-      ]
-    },
-
-    // Performs rewrites based on rev and the usemin prepare configuration
-    usemin: {
-      options: {
-        assetsDirs: ['<%= config.dist %>', '<%= config.dist %>/images']
-      },
-      html: ['<%= config.dist %>/{,*/}*.html'],
-      css: ['<%= config.dist %>/styles/{,*/}*.css']
-    },
-
-    htmlmin: {
-      dist: {
-        options: {
-          // removeCommentsFromCDATA: true,
-          // collapseWhitespace: true,
-          // collapseBooleanAttributes: true,
-          // removeAttributeQuotes: true,
-          // removeRedundantAttributes: true,
-          // useShortDoctype: true,
-          // removeEmptyAttributes: true,
-          // removeOptionalTags: true
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>',
-          src: '*.html',
-          dest: '<%= config.dist %>'
-        }]
-      }
-    },
-
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-     cssmin: {
-       dist: {
-         files: {
-           '<%= config.dist %>/styles/main.css': [
-             '<%= config.app %>/styles/{,*/}*.css'
-           ]
-         }
-       }
-     },
-
-     //uglify: {
-     //  dist: {
-     //    files: {
-     //      expand: true,
-     //      cwd: '<%= config.app %>/scripts',
-     //      src: ['*.js'],
-     //      dest: '<%= config.app %>/scripts',
-     //      ext: '.min.js'
-     //    }
-     //  }
-     //},
 
     // Copies remaining files to places other tasks can use
     copy: {
-      test: {
-        files: [
-          {
-            expand: true,
-            dot: true,
-            cwd: 'node_modules/',
-            src: ['chai/chai.js', 'mocha/mocha.js'],
-            dest: 'test/libs/'
-          }
-        ]
-      },
       dist: {
         files: [
           {
@@ -235,10 +69,21 @@ module.exports = function (grunt) {
               'scripts/{,*/}*.js',
               '{,*/}*.html',
               'styles/{,*/}*.css',
-              '_locales/{,*/}*.json'
+              'manifest.json'
             ]
           }
         ]
+      }
+    },
+
+    uglify: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= config.dist %>/scripts',
+          src: ['*.js', '!*.min.js'],
+          dest: '<%= config.dist %>/scripts/'
+        }]
       }
     },
 
@@ -248,12 +93,7 @@ module.exports = function (grunt) {
         options: {
           buildnumber: true,
           indentSize: 2,
-          background: {
-            target: 'scripts/background.js',
-            exclude: [
-              'scripts/chromereload.js'
-            ]
-          }
+          background: {}
         },
         src: '<%= config.app %>',
         dest: '<%= config.dist %>'
@@ -279,38 +119,19 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('debug', function () {
-    grunt.task.run([
-      'jshint',
-      'babel',
-      'connect:chrome',
-      'watch'
-    ]);
-  });
-
-  grunt.registerTask('test', [
-    'copy:test',
-    'connect:test',
-    'mocha'
+  grunt.registerTask('build', [
+    'copy:dist',
+    'babel',
+    'uglify'
   ]);
 
-  grunt.registerTask('build', [
-    'clean:dist',
-    'babel',
+  grunt.registerTask('release', [
+    'clean:release',
     'chromeManifest:dist',
-    'test',
-    'useminPrepare',
-    'cssmin',
-    'concat',
-    'uglify',
-    'copy:dist',
-    'usemin',
     'compress'
   ]);
 
   grunt.registerTask('default', [
-    'jshint',
-    'test',
     'build'
   ]);
 };
