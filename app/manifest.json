@@ -1,8 +1,8 @@
 {
   "name": "NoComment",
-  "version": "1.7.5",
+  "version": "1.8.1",
   "manifest_version": 2,
-  "description": "Hide comment sections across the web (Social Media, News Articles, Blogs etc).",
+  "description": "Block/Hide comment sections across the web (Social Media, News Articles, Blogs etc).",
   "icons": {
     "16": "images/icon-16.png",
     "32": "images/icon-32.png",
@@ -26,7 +26,6 @@
       "run_at": "document_start"
     }
   ],
-  "default_locale": "en",
   "options_page": "options.html",
   "options_ui": {
     "page": "options.html",
