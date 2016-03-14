@@ -76,19 +76,19 @@ module.exports = function (grunt) {
       }
     },
 
-    //uglify: {
-    //  dist: {
-    //    options: {
-    //      mangle: false
-    //    },
-    //    files: [{
-    //      expand: true,
-    //      cwd: '<%= config.dist %>/scripts',
-    //      src: ['*.js', '!*.min.js'],
-    //      dest: '<%= config.dist %>/scripts/'
-    //    }]
-    //  }
-    //},
+    uglify: {
+      dist: {
+        options: {
+          wrap: true
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= config.dist %>/scripts',
+          src: ['*.js', '!*.min.js'],
+          dest: '<%= config.dist %>/scripts/'
+        }]
+      }
+    },
 
     // Auto buildnumber, exclude debug files. smart builds that event pages
     chromeManifest: {
@@ -124,8 +124,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'copy:dist',
-    'babel'
-    //'uglify'
+    'babel',
+    'uglify'
   ]);
 
   grunt.registerTask('release', [
