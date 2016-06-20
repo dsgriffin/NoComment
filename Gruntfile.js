@@ -35,77 +35,27 @@ module.exports = function (grunt) {
       }
     },
 
-    // Compiles ES6 with Babel
-    babel: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.srcScript %>',
-          src: '{,*/}*.js',
-          dest: '<%= config.dist %>/scripts',
-          ext: '.js'
-        }]
-      }
-    },
-
     // Empties folders to start fresh
     clean: {
       release: ['package']
     },
 
-    // Copies remaining files to places other tasks can use
-    copy: {
-      dist: {
-        files: [
-          {
-            expand: true,
-            dot: true,
-            cwd: '<%= config.app %>',
-            dest: '<%= config.dist %>',
-            src: [
-              'images/{,*/}*',
-              'libs/{,*/}*',
-              'libs/{,*/}*/{,*/}*',
-              'scripts/{,*/}*.js',
-              '{,*/}*.html',
-              'styles/{,*/}*.css',
-              'manifest.json'
-            ]
-          }
-        ]
-      }
-    },
-
-    uglify: {
-      dist: {
-        options: {
-          wrap: true
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= config.dist %>/scripts',
-          src: ['*.js', '!*.min.js'],
-          dest: '<%= config.dist %>/scripts/'
-        }]
-      }
-    },
-
     // Auto buildnumber, exclude debug files. smart builds that event pages
     chromeManifest: {
-      dist: {
+      app: {
         options: {
           buildnumber: true,
           indentSize: 2,
           background: {}
         },
         src: '<%= config.app %>',
-        dest: '<%= config.dist %>'
+        dest: '<%= config.app %>'
       }
     },
 
-    // Compress dist files to package
+    // Compress app files to package
     compress: {
-      dist: {
+      app: {
         options: {
           archive: function() {
             var manifest = grunt.file.readJSON('app/manifest.json');
@@ -114,7 +64,7 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'dist/',
+          cwd: 'app/',
           src: ['**/*'],
           dest: ''
         }]
@@ -122,20 +72,9 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build', [
-    'copy:dist',
-    'babel',
-    'uglify'
-  ]);
-
   grunt.registerTask('release', [
-    'build',
     'clean:release',
-    'chromeManifest:dist',
+    'chromeManifest:app',
     'compress'
-  ]);
-
-  grunt.registerTask('default', [
-    'build'
   ]);
 };
