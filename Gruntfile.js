@@ -129,6 +129,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('release', [
+    'build',
     'clean:release',
     'chromeManifest:dist',
     'compress'
