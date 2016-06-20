@@ -11,7 +11,6 @@ module.exports = function (grunt) {
   // Configurable paths
   var config = {
     app: 'app',
-    dist: 'dist',
     srcScript: '<%= config.app %>/scripts'
   };
 
@@ -19,38 +18,10 @@ module.exports = function (grunt) {
 
     // Project settings
     config: config,
-
-    // Watches files for changes and runs tasks based on the changed files
-    watch: {
-      js: {
-        files: ['<%= config.srcScript %>/{,*/}*.js'],
-        tasks: 'babel'
-      },
-      gruntfile: {
-        files: ['Gruntfile.js']
-      },
-      styles: {
-        files: ['<%= config.app %>/styles/{,*/}*.css'],
-        tasks: []
-      }
-    },
-
+    
     // Empties folders to start fresh
     clean: {
       release: ['package']
-    },
-
-    // Auto buildnumber, exclude debug files. smart builds that event pages
-    chromeManifest: {
-      app: {
-        options: {
-          buildnumber: true,
-          indentSize: 2,
-          background: {}
-        },
-        src: '<%= config.app %>',
-        dest: '<%= config.app %>'
-      }
     },
 
     // Compress app files to package
@@ -74,7 +45,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('release', [
     'clean:release',
-    'chromeManifest:app',
     'compress'
   ]);
 };
