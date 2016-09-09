@@ -1,6 +1,4 @@
-# NoComment
-
-![logo](https://github.com/dsgriffin/NoComment/raw/master/app/images/icon-128.png)
+![Logo](http://dsgriffin.github.io/images/logos/nocomment.png)
 
 A Chrome extension for hiding comment sections across the web (Social Media, News Articles, Blogs etc).
 
