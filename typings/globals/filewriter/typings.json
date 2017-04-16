@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/317e5ee1bcad4c19eee26993b3fd975a0a940053/filewriter/index.d.ts",
+    "raw": "registry:dt/filewriter#0.0.0+20160714054521",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/317e5ee1bcad4c19eee26993b3fd975a0a940053/filewriter/index.d.ts"
+  }
+}

@@ -17,8 +17,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       'comments': document.querySelectorAll(selectorArray.join()),
       'hideAll': () => {
         for (let i of Array.from(noComment.allComments.comments).keys()) {
-          if (noComment.userSettings.display === 'collapse') { noComment.allComments.comments[i].style.display = 'none'; }
-          else if (noComment.userSettings.display === 'hidden') { noComment.allComments.comments[i].style.visibility = 'hidden'; }
+          if (noComment.userSettings.display === 'collapse') { 
+            (<HTMLElement>noComment.allComments.comments[i]).style.display = 'none';
+          }
+          else if (noComment.userSettings.display === 'hidden') { 
+            (<HTMLElement>noComment.allComments.comments[i]).style.visibility = 'hidden'; 
+          }
         }
       }
     },
@@ -30,7 +34,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         let structuredURL = noComment.urlHandling.checkProtocol(allowlist[i].toString());
         let regexURL = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+') + '/?$');
 
-        if (regexURL.test(currentURL)) { return false; }
+        if (regexURL.test(currentURL)) { 
+          return false; 
+        }
       }
 
       return true;
@@ -43,7 +49,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         let structuredURL = noComment.urlHandling.checkProtocol(blocklist[i].toString());
         let regexURL = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+')  + '/?$');
 
-        if (regexURL.test(currentURL)) { return true; }
+        if (regexURL.test(currentURL)) { 
+          return true; 
+        }
       }
 
       return false;
@@ -56,13 +64,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       }
     },
     'observeChanges': {
-      'mutations': new window.MutationObserver(() => {
+      'mutations': new (<any>window).MutationObserver(() => {
         let matches = document.querySelectorAll(selectorArray.join());
 
         for (let i of Array.from(matches).keys()) {
-          if (matches[i].style.display !== 'none') {
-            if (noComment.userSettings.display === 'collapse') { matches[i].style.display = 'none'; }
-            else if (noComment.userSettings.display === 'hidden') { matches[i].style.visibility = 'hidden'; }
+          if ((<HTMLElement>matches[i]).style.display !== 'none') {
+            if (noComment.userSettings.display === 'collapse') { (<HTMLElement>matches[i]).style.display = 'none'; }
+            else if (noComment.userSettings.display === 'hidden') { (<HTMLElement>matches[i]).style.visibility = 'hidden'; }
           }
         }
       }),

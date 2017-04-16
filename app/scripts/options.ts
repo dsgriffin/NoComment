@@ -1,4 +1,8 @@
-'use strict';
+import "jquery-ui";
+import "datatables";
+import "jquery-ui-css";
+import "datatables-css";
+
 
 // SET jQuery UI options display
 $('#radio').buttonset();
