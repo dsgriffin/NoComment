@@ -1,5 +1,5 @@
 var path = require('path');
-var webpack = require("webpack");
+var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -11,33 +11,32 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: '[name].js'
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.css'],
+    extensions: ['.ts', '.tsx', '.js', '.css', 'node_modules'],
     alias: {
-        'jquery-ui': path.join(__dirname, '/node_modules/jquery-ui-dist/jquery-ui.min.js'),
-        'datatables': path.join(__dirname, '/node_modules/datatables/media/js/jquery.dataTables.min.js'),
-        'jquery-ui-css': path.join(__dirname, '/node_modules/jquery-ui/themes/base/core.css'),
-        'datatables-css': path.join(__dirname, '/node_modules/datatables/media/css/jquery.dataTables.min.css')
+      'jquery-ui': path.join(__dirname, '/node_modules/jquery-ui-dist/jquery-ui.min.js'),
+      datatables: path.join(__dirname, '/node_modules/datatables/media/js/jquery.dataTables.min.js')
     }
   },
   module: {
     loaders: [
       { test: /\.tsx?$/, loader: 'ts-loader' },
-      { test: /\.css$/, loader: "style-loader!css-loader" }
+      { test: /\.css$/, loader: "style-loader!css-loader" },
+      { test: /\.(jpe?g|gif|png)$/, loader: 'file-loader?emitFile=false&name=[path][name].[ext]' }
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([ 
-       { from: './app/images', to: path.resolve(__dirname, 'dist') },
-       { from: './app/styles', to: path.resolve(__dirname, 'dist') },
-       { from: './app/templates', to: path.resolve(__dirname, 'dist') },
-       { from: './app/manifest.json', to: path.resolve(__dirname, 'dist') }
+    new CopyWebpackPlugin([
+      { from: './app/images', to: path.resolve(__dirname, 'dist') },
+      { from: './app/styles', to: path.resolve(__dirname, 'dist') },
+      { from: './app/templates', to: path.resolve(__dirname, 'dist') },
+      { from: './app/manifest.json', to: path.resolve(__dirname, 'dist') }
     ]),
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
+      $: 'jquery',
+      jQuery: 'jquery'
     })
   ]
 };

@@ -1,6 +1,6 @@
 {
   "name": "nocomment",
-  "version": "1.8.8",
+  "version": "1.9.0",
   "description": "Block comments across websites on Chrome",
   "author": "Daniel Griffin <mail@danielgriffin.me>",
   "scripts": {
@@ -9,6 +9,7 @@
   "devDependencies": {
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
+    "file-loader": "^0.11.1",
     "style-loader": "^0.16.1",
     "ts-loader": "^2.0.3",
     "typescript": "^2.2.2",

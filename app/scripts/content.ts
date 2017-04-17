@@ -1,6 +1,4 @@
-'use strict';
-
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   // The selector array - this can be expanded to target comments/comment sections on as many sites as possible.
   const selectorArray = ['body [id*="comment"]', 'body [class*="comment"]', '#disqus_thread', '[class*="replies-to"]'];
   // Main noComment object - contains User Settings, comment hide/show methods, URL parsing and more.
@@ -15,18 +13,18 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     },
     'allComments': {
       'comments': document.querySelectorAll(selectorArray.join()),
-      'hideAll': () => {
+      'hideAll': (): void => {
         for (let i of Array.from(noComment.allComments.comments).keys()) {
-          if (noComment.userSettings.display === 'collapse') { 
+          if (noComment.userSettings.display === 'collapse') {
             (<HTMLElement>noComment.allComments.comments[i]).style.display = 'none';
           }
-          else if (noComment.userSettings.display === 'hidden') { 
-            (<HTMLElement>noComment.allComments.comments[i]).style.visibility = 'hidden'; 
+          else if (noComment.userSettings.display === 'hidden') {
+            (<HTMLElement>noComment.allComments.comments[i]).style.visibility = 'hidden';
           }
         }
       }
     },
-    'isNotInAllowList': () => {
+    'isNotInAllowList': (): boolean => {
       const allowlist = noComment.userLists.allowlist;
       const currentURL = document.location.href;
 
@@ -34,37 +32,39 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         let structuredURL = noComment.urlHandling.checkProtocol(allowlist[i].toString());
         let regexURL = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+') + '/?$');
 
-        if (regexURL.test(currentURL)) { 
-          return false; 
+        if (regexURL.test(currentURL)) {
+          return false;
         }
       }
 
       return true;
     },
-    'isInBlockList': () => {
+    'isInBlockList': (): boolean => {
       const blocklist = noComment.userLists.blocklist;
       const currentURL = document.location.href;
 
       for (let i of blocklist.keys()) {
         let structuredURL = noComment.urlHandling.checkProtocol(blocklist[i].toString());
-        let regexURL = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+')  + '/?$');
+        let regexURL = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+') + '/?$');
 
-        if (regexURL.test(currentURL)) { 
-          return true; 
+        if (regexURL.test(currentURL)) {
+          return true;
         }
       }
 
       return false;
     },
     'urlHandling': {
-      'checkProtocol': function (urlString) {
-        if (urlString.search(/^http[s]?\:\/\//) === -1) { urlString = '*://' + urlString; }
+      'checkProtocol': (urlString: string): string => {
+        if (urlString.search(/^http[s]?\:\/\//) === -1) { 
+          urlString = '*://' + urlString; 
+        }
 
         return urlString;
       }
     },
     'observeChanges': {
-      'mutations': new (<any>window).MutationObserver(() => {
+      'mutations': new (<any>window).MutationObserver((): void => {
         let matches = document.querySelectorAll(selectorArray.join());
 
         for (let i of Array.from(matches).keys()) {
@@ -108,5 +108,5 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     }
   }
   // Need to include whether or not the current page contains blockable content, so that the page action can be displayed.
-  sendResponse({'blockableContent': noComment.blockableContent, 'commentsLength':noComment.allComments.comments.length});
+  sendResponse({ 'blockableContent': noComment.blockableContent, 'commentsLength': noComment.allComments.comments.length });
 });

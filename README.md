@@ -20,21 +20,13 @@ http://chrome.google.com/webstore/detail/nocomment/bcaffknecaohmingfdfimlbllnebp
 **Build**
 
 * Clone repo and run `npm install`
+* Build and compile the `app/` folder into a `dist/` folder via `npm run build`
 
 **Test**
 
 * Go to the Chrome extensions page (either via `chrome://extensions/` or the `Chrome Settings Tab > More Tools > Extensions`)
 * Make sure the `Developer Mode` checkbox is ticked
-* Load the `app` folder as an unpacked extension
-
-**Release**
-
-When you're finished coding/testing your changes:
- 
-* Bump the version number inside `app/manifest.json` (following semantic versioning)
-* Then, run `grunt release` which will clean and replace the `zip` inside `package` with the new version of NoComment (which will then be uploaded to the Chrome Web Store by myself).
-  
-P.S: If you accidentally mess up the release, you can just revert the version number inside `app/manifest.json` and run `grunt clean` :) 
+* Load the `dist/` folder as an unpacked extension
 
 # Contributing
 
