@@ -1,112 +1,118 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+
   // The selector array - this can be expanded to target comments/comment sections on as many sites as possible.
-  const selectorArray = ['body [id*="comment"]', 'body [class*="comment"]', '#disqus_thread', '[class*="replies-to"]'];
-  // Main noComment object - contains User Settings, comment hide/show methods, URL parsing and more.
-  const noComment = {
-    'userSettings': {
-      'blockAllComments': request.settings.blockComments,
-      'display': request.settings.visualDisplay
-    },
-    'userLists': {
-      'allowlist': request.allowlist,
-      'blocklist': request.blocklist
-    },
-    'allComments': {
-      'comments': document.querySelectorAll(selectorArray.join()),
-      'hideAll': (): void => {
-        for (let i of Array.from(noComment.allComments.comments).keys()) {
-          if (noComment.userSettings.display === 'collapse') {
-            (<HTMLElement>noComment.allComments.comments[i]).style.display = 'none';
-          }
-          else if (noComment.userSettings.display === 'hidden') {
-            (<HTMLElement>noComment.allComments.comments[i]).style.visibility = 'hidden';
-          }
+  let selectorArray = ['body [id*="comment"]', 'body [class*="comment"]', '#disqus_thread', '[class*="replies-to"]'];
+
+  // The current URL (for allowlist/blocklist usage)
+  const currentURL = document.location.href;
+
+  let userSettings = {
+    'blockAllComments': request.settings.blockComments,
+    'display': request.settings.visualDisplay,
+    'allowlist': request.allowlist,
+    'blocklist': request.blocklist
+  };
+
+  let comments = {
+    'getAll': document.querySelectorAll(selectorArray.join()),
+    'hideAll': (): void => {
+      for (let i of Array.from(comments.getAll).keys()) {
+        if (userSettings.display === 'collapse') {
+          (<HTMLElement>comments.getAll[i]).style.display = 'none';
+        }
+        else if (userSettings.display === 'hidden') {
+          (<HTMLElement>comments.getAll[i]).style.visibility = 'hidden';
         }
       }
-    },
-    'isNotInAllowList': (): boolean => {
-      const allowlist = noComment.userLists.allowlist;
-      const currentURL = document.location.href;
+    }
+  };
 
-      for (let i of allowlist.keys()) {
-        let structuredURL = noComment.urlHandling.checkProtocol(allowlist[i].toString());
-        let regexURL = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+') + '/?$');
+  let isNotInAllowList = (): boolean => {
+    const allowlist = userSettings.allowlist;
 
-        if (regexURL.test(currentURL)) {
-          return false;
-        }
+    for (let i of allowlist.keys()) {
+      let structuredURL = urlHandling.checkProtocol(allowlist[i].toString());
+      let regexURL = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+') + '/?$');
+
+      if (regexURL.test(currentURL)) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  let isInBlockList = (): boolean => {
+    const blocklist = userSettings.blocklist;
+
+    for (let i of blocklist.keys()) {
+      let structuredURL = urlHandling.checkProtocol(blocklist[i].toString());
+      let regexURL = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+') + '/?$');
+
+      if (regexURL.test(currentURL)) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  let urlHandling = {
+    'blockableContent': false,
+    'checkProtocol': (urlString: string): string => {
+      if (urlString.search(/^http[s]?\:\/\//) === -1) {
+        urlString = '*://' + urlString;
       }
 
-      return true;
-    },
-    'isInBlockList': (): boolean => {
-      const blocklist = noComment.userLists.blocklist;
-      const currentURL = document.location.href;
-
-      for (let i of blocklist.keys()) {
-        let structuredURL = noComment.urlHandling.checkProtocol(blocklist[i].toString());
-        let regexURL = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+') + '/?$');
-
-        if (regexURL.test(currentURL)) {
-          return true;
-        }
-      }
-
-      return false;
-    },
-    'urlHandling': {
-      'checkProtocol': (urlString: string): string => {
-        if (urlString.search(/^http[s]?\:\/\//) === -1) { 
-          urlString = '*://' + urlString; 
-        }
-
-        return urlString;
-      }
+      return urlString;
     },
     'observeChanges': {
-      'mutations': new (<any>window).MutationObserver((): void => {
-        let matches = document.querySelectorAll(selectorArray.join());
-
-        for (let i of Array.from(matches).keys()) {
-          if ((<HTMLElement>matches[i]).style.display !== 'none') {
-            if (noComment.userSettings.display === 'collapse') { (<HTMLElement>matches[i]).style.display = 'none'; }
-            else if (noComment.userSettings.display === 'hidden') { (<HTMLElement>matches[i]).style.visibility = 'hidden'; }
-          }
-        }
-      }),
       'config': {
         attributes: true,
         childList: true,
         characterData: true,
         subtree: true,
         attributeFilter: ['id', 'class']
-      }
-    },
-    'blockableContent': false
+      },
+      'mutations': new (<any>window).MutationObserver((): void => {
+        let matches = document.querySelectorAll(selectorArray.join());
+
+        for (let i of Array.from(matches).keys()) {
+          if ((<HTMLElement>matches[i]).style.display !== 'none') {
+            if (userSettings.display === 'collapse') { 
+              (<HTMLElement>matches[i]).style.display = 'none'; 
+            }
+            else if (userSettings.display === 'hidden') { 
+              (<HTMLElement>matches[i]).style.visibility = 'hidden'; 
+            }
+          }
+        }
+      })
+    }
   };
 
-  if (noComment.userSettings.blockAllComments) {
+  if (userSettings.blockAllComments) {
     // If all comments are set to be blocked by default,
     // Check whether the current URL is in Allow List and take appropriate action.
-    if (noComment.isNotInAllowList()) {
+    if (isNotInAllowList()) {
       // It is necessary to show page action.
-      noComment.blockableContent = true;
+      urlHandling.blockableContent = true;
       // Observe any additional elements that match selectorArray
-      noComment.observeChanges.mutations.observe(document.body, noComment.observeChanges.config);
+      urlHandling.observeChanges.mutations.observe(document.body, urlHandling.observeChanges.config);
       // This URL/URL pattern is not Allow List - loop through all comments on page and hide (depending on user visual setting).
-      noComment.allComments.hideAll();
+      comments.hideAll();
     }
   }
   else {
-    if (noComment.isInBlockList()) {
+    if (isInBlockList()) {
       // It is necessary to show page action.
-      noComment.blockableContent = true;
+      urlHandling.blockableContent = true;
       // Observe any additional elements that match selectorArray
-      noComment.observeChanges.mutations.observe(document.body, noComment.observeChanges.config);
+      urlHandling.observeChanges.mutations.observe(document.body, urlHandling.observeChanges.config);
       // Current URL is in Block List - hide all comments.
-      noComment.allComments.hideAll();
+      comments.hideAll();
     }
   }
   // Need to include whether or not the current page contains blockable content, so that the page action can be displayed.
-  sendResponse({ 'blockableContent': noComment.blockableContent, 'commentsLength': noComment.allComments.comments.length });
+  sendResponse({ 'blockableContent': urlHandling.blockableContent, 'commentsLength': comments.getAll.length });
 });
