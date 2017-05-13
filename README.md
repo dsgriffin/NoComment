@@ -1,5 +1,7 @@
 ![Logo](http://dsgriffin.github.io/images/logos/nocomment.png)
 
+![](https://img.shields.io/badge/version-1.9.0-green.svg)
+
 A Chrome extension for hiding comment sections across the web (Social Media, News Articles, Blogs etc).
 
 # Features
