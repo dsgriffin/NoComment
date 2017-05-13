@@ -21,6 +21,7 @@ http://chrome.google.com/webstore/detail/nocomment/bcaffknecaohmingfdfimlbllnebp
 
 * Clone repo and run `npm install`
 * Build and compile the `app/` folder into a `dist/` folder via `npm run build`
+* Watch for TypeScript updates with `npm run watch`
 
 **Test**
 

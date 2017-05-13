@@ -18,6 +18,10 @@ body {
   width: 88%;
 }
 
+section {
+  width: 100%;
+}
+
 /* Accordion */
 .ui-accordion {
   width: 87%;
@@ -28,7 +32,7 @@ body {
 }
 
 #optionsHeader img {
-  width: 115px;
+  width: 80px;
 }
 
 #optionsFooter {
@@ -116,6 +120,7 @@ section.listButtonsSubmit {
 .ui-tabs-vertical .ui-tabs-nav li a {
   display: block;
   text-align: center;
+  outline: none;
   width: 93%;
 }
 
