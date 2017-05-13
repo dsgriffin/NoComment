@@ -16,6 +16,11 @@
     "webpack": "^2.4.1"
   },
   "dependencies": {
+    "@types/chrome": "0.0.46",
+    "@types/datatables.net": "^1.10.1",
+    "@types/filesystem": "0.0.28",
+    "@types/filewriter": "0.0.28",
+    "@types/jquery": "^2.0.43",
     "datatables": "^1.10.13",
     "jquery": "^3.2.1",
     "jquery-ui": "^1.12.1",
