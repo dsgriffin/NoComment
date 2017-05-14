@@ -1,19 +1,21 @@
+import {UserSettings, CommentHandling, UrlHandling, DynamicContentHandling} from './interfaces';
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   // The selector array - this can be expanded to target comments/comment sections on as many sites as possible.
-  let selectorArray = ['body [id*="comment"]', 'body [class*="comment"]', '#disqus_thread', '[class*="replies-to"]'];
+  const selectorArray: ReadonlyArray<string> = ['body [id*="comment"]', 'body [class*="comment"]', '#disqus_thread', '[class*="replies-to"]'];
 
   // The current URL (for allowlist/blocklist usage)
-  const currentURL = document.location.href;
+  const currentURL: string = document.location.href;
 
-  let userSettings = {
+  let userSettings: UserSettings = {
     'blockAllComments': request.settings.blockComments,
     'display': request.settings.visualDisplay,
     'allowlist': request.allowlist,
     'blocklist': request.blocklist
   };
 
-  let comments = {
+  let comments: CommentHandling = {
     'getAll': document.querySelectorAll(selectorArray.join()),
     'hideAll': (): void => {
       for (let i of Array.from(comments.getAll).keys()) {
@@ -27,37 +29,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
   };
 
-  let isNotInAllowList = (): boolean => {
-    const allowlist = userSettings.allowlist;
-
-    for (let i of allowlist.keys()) {
-      let structuredURL = urlHandling.checkProtocol(allowlist[i].toString());
-      let regexURL = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+') + '/?$');
-
-      if (regexURL.test(currentURL)) {
-        return false;
-      }
-    }
-
-    return true;
-  };
-
-  let isInBlockList = (): boolean => {
-    const blocklist = userSettings.blocklist;
-
-    for (let i of blocklist.keys()) {
-      let structuredURL = urlHandling.checkProtocol(blocklist[i].toString());
-      let regexURL = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+') + '/?$');
-
-      if (regexURL.test(currentURL)) {
-        return true;
-      }
-    }
-
-    return false;
-  };
-
-  let urlHandling = {
+  let urlHandling: UrlHandling = {
     'blockableContent': false,
     'checkProtocol': (urlString: string): string => {
       if (urlString.search(/^http[s]?\:\/\//) === -1) {
@@ -65,7 +37,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
 
       return urlString;
-    },
+    }
+  };
+
+  let dynamicContentHandling: DynamicContentHandling = {
     'observeChanges': {
       'config': {
         attributes: true,
@@ -89,6 +64,36 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
       })
     }
+  }
+
+  const isNotInAllowList = (): boolean => {
+    const allowlist: any = userSettings.allowlist;
+
+    for (let i of allowlist.keys()) {
+      let structuredURL: string = urlHandling.checkProtocol(allowlist[i].toString());
+      let regexURL: RegExp = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+') + '/?$');
+
+      if (regexURL.test(currentURL)) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  const isInBlockList = (): boolean => {
+    const blocklist: any = userSettings.blocklist;
+
+    for (let i of blocklist.keys()) {
+      let structuredURL: string = urlHandling.checkProtocol(blocklist[i].toString());
+      let regexURL: RegExp = new RegExp(structuredURL.replace(/\./g, '\\.').replace(/\*/g, '.+') + '/?$');
+
+      if (regexURL.test(currentURL)) {
+        return true;
+      }
+    }
+
+    return false;
   };
 
   if (userSettings.blockAllComments) {
@@ -98,7 +103,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       // It is necessary to show page action.
       urlHandling.blockableContent = true;
       // Observe any additional elements that match selectorArray
-      urlHandling.observeChanges.mutations.observe(document.body, urlHandling.observeChanges.config);
+      dynamicContentHandling.observeChanges.mutations.observe(document.body, dynamicContentHandling.observeChanges.config);
       // This URL/URL pattern is not Allow List - loop through all comments on page and hide (depending on user visual setting).
       comments.hideAll();
     }
@@ -108,7 +113,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       // It is necessary to show page action.
       urlHandling.blockableContent = true;
       // Observe any additional elements that match selectorArray
-      urlHandling.observeChanges.mutations.observe(document.body, urlHandling.observeChanges.config);
+      dynamicContentHandling.observeChanges.mutations.observe(document.body, dynamicContentHandling.observeChanges.config);
       // Current URL is in Block List - hide all comments.
       comments.hideAll();
     }
