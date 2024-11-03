@@ -1,8 +1,8 @@
 export interface UserSettings {
-    blockAllComments: string,
+    blockAllComments: boolean,
     display: string,
-    allowlist: any,
-    blocklist: any
+    allowlist: [],
+    blocklist: []
 } 
 
 export interface CommentHandling {

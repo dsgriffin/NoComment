@@ -1,8 +1,8 @@
 {
   "name": "NoComment",
-  "version": "1.9.0",
-  "manifest_version": 2,
-  "description": "Block/Hide comment sections across the web (Social Media, News Articles, Blogs etc).",
+  "version": "2.0.0",
+  "manifest_version": 3,
+  "description": "Block/hide comment sections across the web (social media, news articles, blogs etc).",
   "icons": {
     "16": "icon-16.png",
     "32": "icon-32.png",
@@ -10,7 +10,8 @@
     "128": "icon-128.png"
   },
   "background": {
-    "scripts": ["background.js"]
+    "service_worker": "service_worker.js",
+    "type": "module"
   },
   "content_scripts": [
     {
@@ -29,7 +30,7 @@
     "page": "options.html",
     "chrome_style": false
   },
-  "page_action": {
+  "action": {
     "default_icon": {
       "19": "icon-19.png",
       "38": "icon-38.png"
@@ -43,6 +44,13 @@
     "storage"
   ],
   "web_accessible_resources": [
-    "128.png"
+    {
+      "resources": [
+        "128.png"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    }
   ]
 }

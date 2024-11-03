@@ -1,7 +1,6 @@
-import {UserSettings, CommentHandling, UrlHandling, DynamicContentHandling} from './interfaces';
+import { UserSettings, CommentHandling, UrlHandling, DynamicContentHandling } from './interfaces';
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-
   // The selector array - this can be expanded to target comments/comment sections on as many sites as possible.
   const selectorArray: ReadonlyArray<string> = ['body [id*="comment"]', 'body [class*="comment"]', '#disqus_thread', '[class*="replies-to"]'];
 
@@ -9,10 +8,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   const currentURL: string = document.location.href;
 
   let userSettings: UserSettings = {
-    'blockAllComments': request.settings.blockComments,
-    'display': request.settings.visualDisplay,
-    'allowlist': request.allowlist,
-    'blocklist': request.blocklist
+    blockAllComments: request.blockAllComments,
+    display: request.display,
+    allowlist: request.allowlist,
+    blocklist: request.blocklist
   };
 
   let comments: CommentHandling = {
