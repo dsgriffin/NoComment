@@ -1,6 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -28,12 +28,14 @@ module.exports = {
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([
-      { from: './app/images', to: path.resolve(__dirname, 'dist') },
-      { from: './app/styles', to: path.resolve(__dirname, 'dist') },
-      { from: './app/templates', to: path.resolve(__dirname, 'dist') },
-      { from: './app/manifest.json', to: path.resolve(__dirname, 'dist') }
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: './app/images', to: path.resolve(__dirname, 'dist') },
+        { from: './app/styles', to: path.resolve(__dirname, 'dist') },
+        { from: './app/templates', to: path.resolve(__dirname, 'dist') },
+        { from: './app/manifest.json', to: path.resolve(__dirname, 'dist') }
+      ]
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
