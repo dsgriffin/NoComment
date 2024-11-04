@@ -1,243 +1,250 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>NoComment - Options</title>
+    <link rel="stylesheet" href="options.css" />
+    <link rel="icon" href="favicon.png" />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <title>NoComment - Options</title>
-  <link rel="stylesheet" href="options.css" />
-  <link rel="icon" href="favicon.png" />
-</head>
+  <body>
+    <header id="optionsHeader">
+      <img src="icon-128.png" alt="NoComment Extension Icon" />
+      <h1>NoComment</h1>
+      <h4>Extension Settings</h4>
+    </header>
 
-<body>
-  <header id="optionsHeader">
-    <img src="icon-128.png" alt="NoComment Extension Icon" />
-    <h1>NoComment</h1>
-    <h4>Extension Settings</h4>
-  </header>
-  <div id="tabs">
-    <nav>
-      <ul>
-        <li><a href="#tabs-1">General Settings</a></li>
-        <li><a href="#tabs-2">Allow List/Block List</a></li>
-        <li><a href="#tabs-3">About This Extension</a></li>
-      </ul>
-    </nav>
-    <article id="tabs-1" data-tab-index="0">
-      <h4>Block all comments by default?</h4>
-      <section id="radio">
-        <div>
-          <input type="radio" id="radio1" name="radio" value="yes" />
-          <label for="radio1" class="ui-corner-all">Yes (except Allow List)</label>
-        </div>
-        <div>
-          <input type="radio" id="radio2" name="radio" value="no" />
-          <label for="radio2" class="ui-corner-all">No (except Block List)</label>
-        </div>
-      </section>
-      <h4>How should the comment section be displayed?</h4>
-      <section>
-        <select id="visualDisplay">
-          <option value="collapse">Collapse comment section (take up no space)</option>
-          <option value="hidden">Visibility hidden (hide section but keep usual space)</option>
-        </select>
-      </section>
-      <h5 class="notification">Remember to save your general settings below</h5>
-      <section>
-        <button type="button" id="saveSettings">Save General Settings</button>
-        <h5 class="notification-alert">
-          <!--  Generated -->
-        </h5>
-      </section>
-    </article>
-    <article id="tabs-2" data-tab-index="1">
-      <section>
-        <h4>URL/URL pattern syntax (important):</h4>
-        <ul class="pattern-syntax-list">
-          <li>
-            <p>If a leading protocol (e.g <code>http://</code>, <code>https://</code>) is not specified, all protocols will
-              be targeted.</p>
-            <p><strong>Example</strong>: <code>www.example.com</code> <strong>Targets</strong>: <code>http://www.example.com</code>,
-              <code>https://www.example.com</code>.</p>
-          </li>
-          <li>
-            <p>The wildcard selector <code>*</code> can be used to match anything/everything, depending on where you use it.</p>
-            <p><strong>Example 1</strong>: <code>http://www.example.com/*</code> <strong>Targets</strong>: <code>http://www.example.com/about.html</code>,
-              <code>http://www.example.com/index/secondDirectory.html</code>.</p>
-            <p><strong>Example 2</strong>: <code>https://example.*/about</code> <strong>Targets</strong>: <code>https://example.co.uk/about</code>,
-              <code>https://example.org/about</code>.</p>
-          </li>
-          <li>
-            <p>If the URL/URL pattern you want to target includes a prefix such as <code>www.</code> (e.g. <code>www.example.com</code>),
-              then <strong>you need to include this prefix</strong>.</p>
-            <p><strong>Example 1</strong>: <code>example.com/hi.txt</code> <strong>Targets</strong>: <code>http://example.com/hi.txt</code>,
-              <code>https://example.com/hi.txt</code>.</p>
-            <p><strong>Example 2</strong>: <code>www.example.com/hi.txt</code> <strong>Targets</strong>: <code>http://www.example.com/hi.txt</code>,
-              <code>https://www.example.com/hi.txt</code>.</p>
-          </li>
+    <div id="tabs">
+      <nav>
+        <ul>
+          <li><a href="#tabs-1">General Settings</a></li>
+          <li><a href="#tabs-2">Allow List/Block List</a></li>
+          <li><a href="#tabs-3">About/How To Use This Extension</a></li>
         </ul>
-      </section>
-      <section class="userlist">
-        <header>
-          <h2>Allow List</h2>
-        </header>
-        <table id="allowlist">
-          <thead>
-            <tr>
-              <th>URL/URL Pattern</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- User generated data -->
-          </tbody>
-        </table>
-      </section>
-      <section class="listButtons">
-        <button type="button" data-list="addNew" data-list-type="allowlist">Add New</button>
-        <button type="button" data-list="modifySelected" data-list-type="allowlist" disabled="disabled">Modify Selected (one)</button>
-        <button type="button" data-list="removeSelected" data-list-type="allowlist" disabled="disabled">Remove Selected (one/multiple)</button>
-        <button type="button" data-list="removeAll" data-list-type="allowlist">Remove All</button>
-      </section>
-      <section class="listButtonsSubmit">
-        <h5 class="notification">Remember to save any Allow List changes below</h5>
-        <button type="button" id="saveAllowList">Save Allow List Settings</button>
-        <h5 class="notification-alert">
-          <!--  Generated -->
-        </h5>
-      </section>
-      <section class="userlist">
-        <header>
-          <h2>Block List</h2>
-        </header>
-        <table id="blocklist">
-          <thead>
-            <tr>
-              <th>URL/URL Pattern</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- User generated data -->
-          </tbody>
-        </table>
-      </section>
-      <section class="listButtons">
-        <button type="button" data-list="addNew" data-list-type="blocklist">Add New</button>
-        <button type="button" data-list="modifySelected" data-list-type="blocklist" disabled="disabled">Modify Selected (one)</button>
-        <button type="button" data-list="removeSelected" data-list-type="blocklist" disabled="disabled">Remove Selected (one/multiple)</button>
-        <button type="button" data-list="removeAll" data-list-type="blocklist">Remove All</button>
-      </section>
-      <section class="listButtonsSubmit">
-        <h5 class="notification">Remember to save any Block list changes below</h5>
-        <button type="button" id="saveBlockList">Save Block list Settings</button>
-        <h5 class="notification-alert">
-          <!--  Generated -->
-        </h5>
-      </section>
-    </article>
-    <article id="tabs-3" data-tab-index="2">
-      <div class="accordion">
-        <h4>General</h4>
-        <div>
-          <p>NoComment is a simple Chrome extension for hiding user-generated comments on the web.</p>
-          <p>I'd greatly appreciate a rating in the Google store along with any constructive criticism you have. If the application
-            doesn't function correctly on a particular website, let me know, preferably by opening <a href="https://github.com/dsgriffin/NoComment/issues">an issue on the repo</a>.</p>
-          <p>If you'd like to donate (thank you!) you can send it to <a href="https://paypal.me/dsgriffin" target="blank">paypal.me/dsgriffin</a></p>
-        </div>
-        <h4>Purpose</h4>
-        <div>
-          <p>There are various reasons why someone may wish to hide comments on all/specific sites, including but not limited to:</p>
-          <ul>
-            <li><strong>Productivity</strong> - sometimes you can find yourself spending a lot of time reading comments and not
-              really gaining anything useful from it.</li>
-            <li><strong>Noise</strong> - sometimes comments generate unnecessary noise to an article (e.g. off-topic discussions).</li>
-            <li><strong>Trolls/Human behaviour</strong> - sadly, it isn't uncommon to come across ignorant/hurtful/abusive
-              comments online.</li>
-          </ul>
-        </div>
-        <h4>How To Use/Features Explained</h4>
-        <div class="accordion">
-          <h4>Default And General Settings</h4>
-          <div>
-            <p>On a fresh installation, NoComment does the following:</p>
-            <ul>
-              <li>Blocks comments on all websites where comments are successfully detected.</li>
-              <li>Visually, these comments are "collapsed" - as in the space they initially took up is completely removed.</li>
-            </ul>
-            <p>Both of these settings can be changed:</p>
-            <ul>
-              <li>NoComment can either block all comments on all pages by default (except those on websites that match an entry
-                in the Allow List), or block no comments on all pages by default (except those on websites that match an
-                entry in the Block List).</li>
-              <li>Comments can either be "collapsed" (previously explained) or "hidden" - the hidden option also hides the comments
-                themselves, but keeps the space these comments usually take up when visible.</li>
-            </ul>
-          </div>
-          <h4>Allow List/Block List</h4>
-          <div class="accordion">
-            <h4>Purpose</h4>
-            <div>
-              <ul>
-                <li>The Allow List is where users can store URLs/URL patterns they wish to be exempt from the comment blocking
-                  process that occurs when the "Block all comments on all pages" setting is active.</li>
-                <li>The Block List is the opposite - it is where users can store URLs/URL patterns they wish to block comments
-                  on when the "Block no comments on all pages" setting is active.</li>
-              </ul>
-            </div>
-            <h4>URL/URL Pattern Syntax</h4>
-            <div>
-              <p>This is discussed (with example use-cases) at the top of the Allow List/Block List page. Be sure to read it,
-                especially if plan on using the URL pattern wildcard (<code>*</code>) selector.</p>
-            </div>
-            <h4>List Actions</h4>
-            <div>
-              <ul>
-                <li><strong>Add New</strong> - Add a new URL/URL pattern to the list.</li>
-                <li><strong>Modify Selected (one)</strong> - Modify the currently selected URL/URL pattern. Click on a row to
-                  select it. This action is only allowed when exactly one row is selected.</li>
-                <li><strong>Remove Selected (one/multiple)</strong> - Remove the currently selected URL/URL patterns. Click on
-                  rows to select them. This action can be used to remove one or more list entries at a time.</li>
-                <li><strong>Remove All</strong> - Remove all URL/URL pattern from the list.</li>
-              </ul>
-            </div>
-          </div>
-          <h4>Browser Icon</h4>
-          <div>
-            <p>This will only show on pages where the blocking of comments is in effect. Clicking on the icon will show you
-              some information about NoComment, as well as a quick-link to the options page (the same one you're reading
-              right now!), where you can change your settings.</p>
-          </div>
-          <h4>Uninstall NoComment</h4>
-          <div>
-            <p>If you would like to completely uninstall this extension, you can do so via.</p>
-            <ul>
-              <li>Navigating to the Extensions menu - either type <code>chrome://extensions</code> into the address bar or go
-                to <code>Chrome Menu > Tools > Extensions</code>.</li>
-              <li>Click the recycle bin icon that is next to the NoComment extension.</li>
-            </ul>
-            <p>If you do decide to uninstall, I would appreciate it if you let me know why via. rating feedback in the Chrome
-              store, so I know what needs improving.</p>
-          </div>
-        </div>
-        <h4>Licensing/Cost</h4>
-        <div>
-          <p>Copyright &copy; 2025 <a href="https://github.com/dsgriffin">Daniel Griffin</a></p>
-          <p>This extension is 100% free and licenced under the MIT license.</p>
-          <p>If you'd like to donate (thank you *so* much) you can send it to <a href="https://paypal.me/dsgriffin" target="blank">paypal.me/dsgriffin</a></p>
-          <p>If you decide to use/modify this extension's code in any way, I would really appreciate the following two things:</p>
-          <ul>
-            <li>You leave the license/copyright-related stuff in as it is.</li>
-            <li>If you think your modification(s) may be useful to others/improve the application, please consider contributing
-              them to the <a href="https://github.com/dsgriffin/NoComment" target="blank">NoComment Github Project</a>.</li>
-          </ul>
-          <p>Thank you for reading, and I hope this extension is of use to you/improves your online experience in some way.</p>
-        </div>
-      </div>
-    </article>
-  </div>
-  <footer id="optionsFooter">
-    Copyright &copy; 2025 Daniel Griffin. This extension is maintained on <a href="https://github.com/dsgriffin/NoComment"
-      target="blank">Github</a>.
-  </footer>
-  <script src="options.js"></script>
-</body>
+      </nav>
 
+      <article id="tabs-1" data-tab-index="0">
+        <h4>Block all comments by default?</h4>
+
+        <section id="radio">
+          <div>
+            <input type="radio" id="radio1" name="radio" value="yes" />
+            <label for="radio1" class="ui-corner-all">Yes (except Allow List)</label>
+          </div>
+
+          <div>
+            <input type="radio" id="radio2" name="radio" value="no" />
+            <label for="radio2" class="ui-corner-all">No (except Block List)</label>
+          </div>
+        </section>
+
+        <h4>How should the comment section be displayed?</h4>
+
+        <section>
+          <select id="visualDisplay">
+            <option value="collapse">Collapse comment section (take up no space)</option>
+            <option value="hidden">Visibility hidden (hide section but keep usual space)</option>
+          </select>
+        </section>
+
+        <h5 class="notification">Remember to save your general settings below</h5>
+
+        <section>
+          <button type="button" id="saveSettings">Save General Settings</button>
+          <h5 class="notification-alert">
+            <!--  Generated -->
+          </h5>
+        </section>
+      </article>
+
+      <article id="tabs-2" data-tab-index="1">
+        <section>
+          <h4>URL/URL pattern syntax (important!):</h4>
+
+          <ul class="pattern-syntax-list">
+            <li>
+              <p>The wildcard selector <code>*</code> can be used to match anything/everything, depending on where you use it.</p>
+            </li>
+
+            <li>
+              <p>If the URL/URL pattern you want to target includes a prefix such as <code>www.</code> (e.g. <code>www.example.com</code>),
+                then <strong>you need to include this prefix</strong>.</p>
+            </li>
+
+            <li>
+              <p><strong>Example 1</strong>: <code>www.youtube.com/*</code></p> 
+              <p><strong>Targets</strong>: <code>all youtube videos</code></p>
+            </li>
+
+            <li>
+              <p><strong>Example 2</strong>: <code>www.reddit.com/r/news/*</code></p> 
+              <p><strong>Targets</strong>: <code>any posts under the r/news subreddit</code></p>
+            </li>
+          </ul>
+        </section>
+
+        <section class="userlist">
+          <header>
+            <h2>Allow List</h2>
+          </header>
+          
+          <table id="allowlist">
+            <thead>
+              <tr>
+                <th>URL/URL Pattern</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- User generated data -->
+            </tbody>
+          </table>
+        </section>
+
+        <section class="listButtons">
+          <button type="button" data-list="addNew" data-list-type="allowlist">Add New</button>
+          <button type="button" data-list="modifySelected" data-list-type="allowlist" disabled="disabled">Modify Selected (one)</button>
+          <button type="button" data-list="removeSelected" data-list-type="allowlist" disabled="disabled">Remove Selected (one/multiple)</button>
+          <button type="button" data-list="removeAll" data-list-type="allowlist">Remove All</button>
+        </section>
+
+        <section class="listButtonsSubmit">
+          <h5 class="notification">Remember to save any Allow List changes below</h5>
+          <button type="button" id="saveAllowList">Save Allow List Settings</button>
+          <h5 class="notification-alert">
+            <!--  Generated -->
+          </h5>
+        </section>
+
+        <section class="userlist">
+          <header>
+            <h2>Block List</h2>
+          </header>
+
+          <table id="blocklist">
+            <thead>
+              <tr>
+                <th>URL/URL Pattern</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- User generated data -->
+            </tbody>
+          </table>
+        </section>
+
+        <section class="listButtons">
+          <button type="button" data-list="addNew" data-list-type="blocklist">Add New</button>
+          <button type="button" data-list="modifySelected" data-list-type="blocklist" disabled="disabled">Modify Selected (one)</button>
+          <button type="button" data-list="removeSelected" data-list-type="blocklist" disabled="disabled">Remove Selected (one/multiple)</button>
+          <button type="button" data-list="removeAll" data-list-type="blocklist">Remove All</button>
+        </section>
+        
+        <section class="listButtonsSubmit">
+          <h5 class="notification">Remember to save any Block list changes below</h5>
+          <button type="button" id="saveBlockList">Save Block list Settings</button>
+          <h5 class="notification-alert">
+            <!--  Generated -->
+          </h5>
+        </section>
+      </article>
+
+      <article id="tabs-3" data-tab-index="2">
+        <div class="accordion">
+          <h4>About</h4>
+
+          <div>
+            <p>NoComment is a simple Chrome extension for hiding user-generated comments on the web.</p>
+            <p>I'd appreciate a rating in the Google store (along with any constructive criticism you have). If the application
+              doesn't function correctly on a particular website, let me know by opening <a href="https://github.com/dsgriffin/NoComment/issues">an issue on the Github repo</a>.</p>
+          </div>
+
+          <div class="accordion">
+            <h4>Default And General Settings</h4>
+
+            <div>
+              <p>On a fresh installation, NoComment does the following:</p>
+              <ul>
+                <li>Blocks comments on all websites where comments are successfully detected.</li>
+                <li>Visually, these comments are "collapsed"; as in, the space they initially took up is completely removed.</li>
+              </ul>
+              <p>Both of these settings can be changed:</p>
+              <ul>
+                <li>
+                  NoComment can either block all comments on all websites where comments are detected (except on website routes that are in the Allowlist), 
+                  or block no comments on all pages (except on website routes that are in the Blocklist).
+                </li>
+                <li>Comments can either be "collapsed" (previously explained) or "hidden" - the hidden option also hides the comments
+                  themselves, but keeps the space these comments usually take up when visible.</li>
+              </ul>
+            </div>
+
+            <h4>Allow List/Block List</h4>
+
+            <div class="accordion">
+              <h4>Purpose</h4>
+
+              <div>
+                <ul>
+                  <li>The Allow List is where users can store URLs/URL patterns they wish to be exempt from the comment blocking
+                    process that occurs when the "Block all comments on all pages" setting is active.</li>
+                  <li>The Block List is the opposite - it is where users can store URLs/URL patterns they wish to block comments
+                    on when the "Block no comments on all pages" setting is active.</li>
+                </ul>
+              </div>
+
+              <h4>URL/URL Pattern Syntax</h4>
+
+              <div>
+                <p>This is discussed (with example use-cases) at the top of the Allow List/Block List page. Be sure to read it,
+                  especially if plan on using the URL pattern wildcard (<code>*</code>) selector.</p>
+              </div>
+
+              <h4>List Actions</h4>
+
+              <div>
+                <ul>
+                  <li><strong>Add New</strong> - Add a new URL/URL pattern to the list.</li>
+                  <li><strong>Modify Selected (one)</strong> - Modify the currently selected URL/URL pattern. Click on a row to
+                    select it. This action is only allowed when exactly one row is selected.</li>
+                  <li><strong>Remove Selected (one/multiple)</strong> - Remove the currently selected URL/URL patterns. Click on
+                    rows to select them. This action can be used to remove one or more list entries at a time.</li>
+                  <li><strong>Remove All</strong> - Remove all URL/URL pattern from the list.</li>
+                </ul>
+              </div>
+            </div>
+            
+            <h4>Donate</h4>
+
+            <div>
+              <p>If you'd like to make a donation (thank you!) you can send one via. <a href="https://paypal.me/dsgriffin" target="blank">paypal.me/dsgriffin</a></p>
+            </div>
+
+            <h4>Uninstall NoComment</h4>
+
+            <div>
+              <p>If you would like to completely uninstall this extension, you can do so via.</p>
+              <ul>
+                <li>Navigating to the Extensions menu; either type <code>chrome://extensions</code> into the address bar or go
+                  to <code>Chrome Menu > Tools > Extensions</code>.</li>
+                <li>Click the recycle bin icon that is next to the NoComment extension.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h4>Software Licensing/Code</h4>
+
+          <div>
+            <p>Extension License: MIT</p>
+            <p>If you decide to use & modify this extensions' code in any way, please ensure the license remains as MIT and a reference to my original project is made.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <footer id="optionsFooter">
+      Copyright &copy; 2025 Daniel Griffin. This extension is maintained at <a href="https://github.com/dsgriffin/NoComment" target="blank">Github</a>.
+    </footer>
+
+    <script src="options.js"></script>
+  </body>
 </html>

@@ -118,7 +118,7 @@ $('[data-list="addNew"]').click(function () {
 
   $('<div></div>')
     .append(`<p>Enter a valid URL/URL pattern:</p>
-             <input type="url" id="newListItem" class="ui-corner-all" style="width:240px;" placeholder="http://www.example.com"/>`)
+             <input type="url" id="newListItem" class="ui-corner-all" style="width:240px;" placeholder="www.example.com"/>`)
     .dialog({
       modal: true,
       title: `Add new URL/URL pattern to ${listType}`,
