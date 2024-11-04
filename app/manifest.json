@@ -19,10 +19,8 @@
         "content.js"
       ],
       "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "run_at": "document_start"
+        "*://*/*"
+      ]
     }
   ],
   "options_page": "options.html",
