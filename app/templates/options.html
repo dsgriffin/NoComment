@@ -28,13 +28,13 @@
 
         <section id="radio">
           <div>
-            <input type="radio" id="radio1" name="radio" value="yes" />
-            <label for="radio1" class="ui-corner-all">Yes (except Allow List)</label>
+            <input type="radio" id="radio1" name="radio" value="no" />
+            <label for="radio1" class="ui-corner-all">No (except Block List)</label>
           </div>
 
           <div>
-            <input type="radio" id="radio2" name="radio" value="no" />
-            <label for="radio2" class="ui-corner-all">No (except Block List)</label>
+            <input type="radio" id="radio2" name="radio" value="yes" />
+            <label for="radio2" class="ui-corner-all">Yes (except Allow List)</label>
           </div>
         </section>
 
@@ -75,38 +75,6 @@
 
         <section class="userlist">
           <header>
-            <h2>Allow List</h2>
-          </header>
-          
-          <table id="allowlist">
-            <thead>
-              <tr>
-                <th>URL/URL Pattern</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- User generated data -->
-            </tbody>
-          </table>
-        </section>
-
-        <section class="listButtons">
-          <button type="button" data-list="addNew" data-list-type="allowlist">Add New</button>
-          <button type="button" data-list="modifySelected" data-list-type="allowlist" disabled="disabled">Modify Selected</button>
-          <button type="button" data-list="removeSelected" data-list-type="allowlist" disabled="disabled">Remove Selected</button>
-          <button type="button" data-list="removeAll" data-list-type="allowlist">Remove All</button>
-        </section>
-
-        <section class="listButtonsSubmit">
-          <h5 class="notification">Remember to save any Allow List changes below</h5>
-          <button type="button" id="saveAllowList">Save Allow List Settings</button>
-          <h5 class="notification-alert">
-            <!--  Generated -->
-          </h5>
-        </section>
-
-        <section class="userlist">
-          <header>
             <h2>Block List</h2>
           </header>
 
@@ -136,6 +104,38 @@
             <!--  Generated -->
           </h5>
         </section>
+
+        <section class="userlist">
+          <header>
+            <h2>Allow List</h2>
+          </header>
+          
+          <table id="allowlist">
+            <thead>
+              <tr>
+                <th>URL/URL Pattern</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- User generated data -->
+            </tbody>
+          </table>
+        </section>
+
+        <section class="listButtons">
+          <button type="button" data-list="addNew" data-list-type="allowlist">Add New</button>
+          <button type="button" data-list="modifySelected" data-list-type="allowlist" disabled="disabled">Modify Selected</button>
+          <button type="button" data-list="removeSelected" data-list-type="allowlist" disabled="disabled">Remove Selected</button>
+          <button type="button" data-list="removeAll" data-list-type="allowlist">Remove All</button>
+        </section>
+
+        <section class="listButtonsSubmit">
+          <h5 class="notification">Remember to save any Allow List changes below</h5>
+          <button type="button" id="saveAllowList">Save Allow List Settings</button>
+          <h5 class="notification-alert">
+            <!--  Generated -->
+          </h5>
+        </section>
       </article>
 
       <article id="tabs-3" data-tab-index="2">
@@ -151,20 +151,14 @@
           <h4>Defaults & General Settings</h4>
 
           <div>
-            <p>On a fresh installation, NoComment does the following:</p>
-            <ul>
-              <li>Blocks comments on all websites where comments are successfully detected.</li>
-              <li>Visually, these comments are "collapsed"; as in, the space they initially took up is completely removed.</li>
-            </ul>
-            <p>Both of these settings can be changed:</p>
-            <ul>
-              <li>
-                NoComment can either block all comments on all websites where comments are detected (except on website routes that are in the Allowlist), 
-                or block no comments on all pages (except on website routes that are in the Blocklist).
-              </li>
-              <li>Comments can either be "collapsed" (previously explained) or "hidden" - the hidden option also hides the comments
-                themselves, but keeps the space these comments usually take up when visible.</li>
-            </ul>
+            <p>On a fresh installation, NoComment does <strong>not</strong> block any comments.</p>
+            <p>If you'd like to block comments on specific websites/routes only, you're can add those websites/routes to your Blocklist.</p>
+            <p>If instead you prefer to block comments on ALL websites by default, then you can select the option <strong>Yes (Except Allowlist)</strong> 
+              & add any particular websites/routes to your Allowlist if you don't want to block comments on them.</p>
+            <br>
+            <p>You'll notice that, by default, comments are "collapsed"; as in, the space they initially took up is completely removed.</p>
+            <p>If you prefer, you can change this to "hidden"; the hidden option also hides the comments
+              themselves, but keeps the space these comments usually take up when visible.</p>
           </div>
 
           <h4>Allow List/Block List</h4>

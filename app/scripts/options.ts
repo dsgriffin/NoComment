@@ -21,7 +21,7 @@ $('#allowlist, #blocklist').DataTable({ 'scrollY': '200px', 'paging': false, 'jQ
 $('div.accordion').accordion({ heightStyle: 'content', collapsible: false });
 
 chrome.storage.sync.get({
-  blockAllComments: true,
+  blockAllComments: false,
   display: 'collapse',
   allowlist: [],
   blocklist: []
@@ -40,8 +40,8 @@ chrome.storage.sync.get({
   allowlist.draw();
   blocklist.draw();
 
-  $('#radio1').prop('checked', optionsStorage.blockAllComments).button('refresh');
-  $('#radio2').prop('checked', !optionsStorage.blockAllComments).button('refresh');
+  $('#radio1').prop('checked', !optionsStorage.blockAllComments).button('refresh');
+  $('#radio2').prop('checked', optionsStorage.blockAllComments).button('refresh');
   $('#visualDisplay').val(optionsStorage.display).selectmenu('refresh');
 });
 

@@ -3,7 +3,7 @@ import { UserSettings } from "./interfaces";
 // Sync user settings + show the page action icon if there are comments being blocked on the current tab
 chrome.tabs.onUpdated.addListener((tabId: number, info: any): void => {
   chrome.storage.sync.get({
-    blockAllComments: true,
+    blockAllComments: false,
     display: 'collapse',
     allowlist: [],
     blocklist: []
