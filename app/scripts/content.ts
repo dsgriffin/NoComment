@@ -4,7 +4,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   // The selector array - this can be expanded to target comments/comment sections on as many sites as possible.
   const selectorArray: ReadonlyArray<string> = [
     'body [id*="comment"]', 'body [class*="comment"]', '#disqus_thread', '[class*="replies-to"]',
-    'div[aria-label^="Comment by"]'
+    'div[aria-label^="Comment by"]', '[data-testid="tweet"]:only-child'
   ];
 
   // The current URL (for allowlist/blocklist usage)
