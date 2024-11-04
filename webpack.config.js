@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  mode: 'production',
   entry: {
     service_worker: './app/scripts/service_worker.ts',
     content: './app/scripts/content.ts',

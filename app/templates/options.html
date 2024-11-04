@@ -142,28 +142,27 @@
 
           <div>
             <p>NoComment is a simple Chrome extension for hiding user-generated comments on the web.</p>
-            <p>I'd appreciate a rating in the Google store, along with any constructive criticism you have! Alternatively, feel free to 
-              <a href="https://github.com/dsgriffin/NoComment/issues">open an issue on GitHub</a> if you've discovered any major problems with the extension.</p>
+            <p>I'd appreciate a rating in the Google store, along with any constructive criticism you have!</p>
           </div>
 
-          <h4>Defaults & General Settings</h4>
+          <h4>Defaults & Settings</h4>
 
           <div>
-            <p>On a fresh installation, NoComment does <strong>not</strong> block any comments.</p>
-            <p>If you'd like to block comments on specific websites/routes only, you can add those websites/routes to your Blocklist.</p>
-            <p>If instead you prefer to block comments on ALL websites by default, then you can select the option <strong>Yes (Except Allowlist)</strong> 
-              & add any particular websites/routes to your Allowlist if you don't want to block comments on them.</p>
-            <p>You'll notice that, by default, comments are "collapsed"; as in, the space they initially took up is completely removed.</p>
-            <p>If you prefer, you can change this to "hidden"; the hidden option also hides the comments
-              themselves, but keeps the space these comments usually take up when visible.</p>
+            <p>On a fresh installation, NoComment does not block any comments; if you'd like to block comments on specific websites/routes only, you can add those websites/routes to your "Blocklist".</p>
+            <p>If you prefer to block comments on all sites by default, you can do that, and add websites/routes to your "Allowlist" instead.</p>
+            <p>You can even use the wildcard selector "*" to block or allow comments on specific "routes" of a website.</p>
+            <p>Examples:</p>
+            <p>www.youtube.com/*</p>
+            <p>x.com/*/status/* </p>
+            <p>www.reddit.com/r/news/*</p>
+            <p>The first example blocks/allows all YouTube videos, the second blocks/allows all X statuses, and the third specifically only blocks/allows comments on all Reddit posts in the r/news subreddit.</p>
+            <p>You're also able to change the way the comments are hidden; by default they are "collapsed" and remove the space taken originally like they never existed, but this can be changed to "hidden" if you'd like to keep the empty space the comments originally took.</p>
           </div>
 
-          <h4>Allowlist/Blocklist URL Pattern Syntax</h4>
+          <h4>Bugs/Issues</h4>
 
           <div>
-            <p>This is discussed (with example use-cases) at the top of the Allow List/Block List page.</p> 
-            <p>It is vital that you remember to include the <code>www.</code> prefix if the website you're using displays it.</p> 
-            <p>Just as important is to include the wildcard selector <code>*</code> in the correct place.</p>
+            <p>If you have major issues you'd like to report, feel free to open up an issue on the GitHub repo: https://github.com/dsgriffin/NoComment</p>
           </div>
             
           <h4>Donate</h4>
@@ -179,11 +178,12 @@
             <p>Then, click the recycle bin icon that is next to the NoComment extension.</p>
           </div>
 
-          <h4>Software Licensing/Code</h4>
+          <h4>Licensing/Contributing</h4>
 
           <div>
-            <p>Extension License: MIT</p>
-            <p>If you decide to use & modify this extensions' code in any way, please ensure the license remains as MIT and a reference to my original project is made.</p>
+            <p>Extension License: MIT.</p>
+            <p>The NoComment GitHub repo can be found at: https://github.com/dsgriffin/NoComment.</p>
+            <p>If you decide to modify this extensions' code in any way, please ensure the license remains as MIT & a reference to my original project is made.</p>
           </div>
         </div>
       </article>
