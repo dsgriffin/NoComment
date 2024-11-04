@@ -121,5 +121,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
   }
   // Need to include whether or not the current page contains blockable content, so that the page action can be displayed.
-  sendResponse({ 'blockableContent': urlHandling.blockableContent, 'commentsLength': comments.getAll.length });
+  sendResponse({ 
+    'blockableContent': urlHandling.blockableContent, 
+    'commentsLength': comments.getAll.length 
+  });
 });

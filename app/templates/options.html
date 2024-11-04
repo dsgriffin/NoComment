@@ -19,7 +19,7 @@
         <ul>
           <li><a href="#tabs-1">General Settings</a></li>
           <li><a href="#tabs-2">Allow List/Block List</a></li>
-          <li><a href="#tabs-3">About/How To Use This Extension</a></li>
+          <li><a href="#tabs-3">About/How To Use</a></li>
         </ul>
       </nav>
 
@@ -61,26 +61,16 @@
         <section>
           <h4>URL/URL pattern syntax (important!):</h4>
 
-          <ul class="pattern-syntax-list">
-            <li>
-              <p>The wildcard selector <code>*</code> can be used to match anything/everything, depending on where you use it.</p>
-            </li>
+          <p>1. The wildcard selector <strong>*</strong> can be used to match anything/everything, depending on where you use it.</p>
+          
+          <p>2. If the URL/URL pattern you want to target includes a prefix such as <strong>www.</strong> (e.g. <strong>www.example.com</strong>),
+            then <strong>you need to include this prefix</strong>.</p>
 
-            <li>
-              <p>If the URL/URL pattern you want to target includes a prefix such as <code>www.</code> (e.g. <code>www.example.com</code>),
-                then <strong>you need to include this prefix</strong>.</p>
-            </li>
+          <p><strong>Example 1</strong>: www.youtube.com/*</p> 
+          <p><strong>Targets</strong>: all youtube videos</p>
 
-            <li>
-              <p><strong>Example 1</strong>: <code>www.youtube.com/*</code></p> 
-              <p><strong>Targets</strong>: <code>all youtube videos</code></p>
-            </li>
-
-            <li>
-              <p><strong>Example 2</strong>: <code>www.reddit.com/r/news/*</code></p> 
-              <p><strong>Targets</strong>: <code>any posts under the r/news subreddit</code></p>
-            </li>
-          </ul>
+          <p><strong>Example 2</strong>: www.reddit.com/r/news/*</p> 
+          <p><strong>Targets</strong>: any posts under the r/news subreddit</p>
         </section>
 
         <section class="userlist">
@@ -102,8 +92,8 @@
 
         <section class="listButtons">
           <button type="button" data-list="addNew" data-list-type="allowlist">Add New</button>
-          <button type="button" data-list="modifySelected" data-list-type="allowlist" disabled="disabled">Modify Selected (one)</button>
-          <button type="button" data-list="removeSelected" data-list-type="allowlist" disabled="disabled">Remove Selected (one/multiple)</button>
+          <button type="button" data-list="modifySelected" data-list-type="allowlist" disabled="disabled">Modify Selected</button>
+          <button type="button" data-list="removeSelected" data-list-type="allowlist" disabled="disabled">Remove Selected</button>
           <button type="button" data-list="removeAll" data-list-type="allowlist">Remove All</button>
         </section>
 
@@ -134,8 +124,8 @@
 
         <section class="listButtons">
           <button type="button" data-list="addNew" data-list-type="blocklist">Add New</button>
-          <button type="button" data-list="modifySelected" data-list-type="blocklist" disabled="disabled">Modify Selected (one)</button>
-          <button type="button" data-list="removeSelected" data-list-type="blocklist" disabled="disabled">Remove Selected (one/multiple)</button>
+          <button type="button" data-list="modifySelected" data-list-type="blocklist" disabled="disabled">Modify Selected</button>
+          <button type="button" data-list="removeSelected" data-list-type="blocklist" disabled="disabled">Remove Selected</button>
           <button type="button" data-list="removeAll" data-list-type="blocklist">Remove All</button>
         </section>
         
@@ -158,77 +148,53 @@
               doesn't function correctly on a particular website, let me know by opening <a href="https://github.com/dsgriffin/NoComment/issues">an issue on the Github repo</a>.</p>
           </div>
 
-          <div class="accordion">
-            <h4>Default And General Settings</h4>
+          <h4>Defaults & General Settings</h4>
 
-            <div>
-              <p>On a fresh installation, NoComment does the following:</p>
-              <ul>
-                <li>Blocks comments on all websites where comments are successfully detected.</li>
-                <li>Visually, these comments are "collapsed"; as in, the space they initially took up is completely removed.</li>
-              </ul>
-              <p>Both of these settings can be changed:</p>
-              <ul>
-                <li>
-                  NoComment can either block all comments on all websites where comments are detected (except on website routes that are in the Allowlist), 
-                  or block no comments on all pages (except on website routes that are in the Blocklist).
-                </li>
-                <li>Comments can either be "collapsed" (previously explained) or "hidden" - the hidden option also hides the comments
-                  themselves, but keeps the space these comments usually take up when visible.</li>
-              </ul>
-            </div>
+          <div>
+            <p>On a fresh installation, NoComment does the following:</p>
+            <ul>
+              <li>Blocks comments on all websites where comments are successfully detected.</li>
+              <li>Visually, these comments are "collapsed"; as in, the space they initially took up is completely removed.</li>
+            </ul>
+            <p>Both of these settings can be changed:</p>
+            <ul>
+              <li>
+                NoComment can either block all comments on all websites where comments are detected (except on website routes that are in the Allowlist), 
+                or block no comments on all pages (except on website routes that are in the Blocklist).
+              </li>
+              <li>Comments can either be "collapsed" (previously explained) or "hidden" - the hidden option also hides the comments
+                themselves, but keeps the space these comments usually take up when visible.</li>
+            </ul>
+          </div>
 
-            <h4>Allow List/Block List</h4>
+          <h4>Allow List/Block List</h4>
+          <div>
+            <ul>
+              <li>The Allow List is where users can store URLs/URL patterns they wish to be exempt from the comment blocking
+                process that occurs when the "Block all comments on all pages" setting is active.</li>
+              <li>The Block List is the opposite - it is where users can store URLs/URL patterns they wish to block comments
+                on when the "Block no comments on all pages" setting is active.</li>
+            </ul>
+          </div>
 
-            <div class="accordion">
-              <h4>Purpose</h4>
+          <h4>URL/URL Pattern Syntax</h4>
 
-              <div>
-                <ul>
-                  <li>The Allow List is where users can store URLs/URL patterns they wish to be exempt from the comment blocking
-                    process that occurs when the "Block all comments on all pages" setting is active.</li>
-                  <li>The Block List is the opposite - it is where users can store URLs/URL patterns they wish to block comments
-                    on when the "Block no comments on all pages" setting is active.</li>
-                </ul>
-              </div>
-
-              <h4>URL/URL Pattern Syntax</h4>
-
-              <div>
-                <p>This is discussed (with example use-cases) at the top of the Allow List/Block List page. Be sure to read it,
-                  especially if plan on using the URL pattern wildcard (<code>*</code>) selector.</p>
-              </div>
-
-              <h4>List Actions</h4>
-
-              <div>
-                <ul>
-                  <li><strong>Add New</strong> - Add a new URL/URL pattern to the list.</li>
-                  <li><strong>Modify Selected (one)</strong> - Modify the currently selected URL/URL pattern. Click on a row to
-                    select it. This action is only allowed when exactly one row is selected.</li>
-                  <li><strong>Remove Selected (one/multiple)</strong> - Remove the currently selected URL/URL patterns. Click on
-                    rows to select them. This action can be used to remove one or more list entries at a time.</li>
-                  <li><strong>Remove All</strong> - Remove all URL/URL pattern from the list.</li>
-                </ul>
-              </div>
-            </div>
+          <div>
+            <p>This is discussed (with example use-cases) at the top of the Allow List/Block List page. Be sure to read it,
+              especially if plan on using the URL pattern wildcard (<code>*</code>) selector.</p>
+          </div>
             
-            <h4>Donate</h4>
+          <h4>Donate</h4>
 
-            <div>
-              <p>If you'd like to make a donation (thank you!) you can send one via. <a href="https://paypal.me/dsgriffin" target="blank">paypal.me/dsgriffin</a></p>
-            </div>
+          <div>
+            <p>If you'd like to make a donation (thank you!) you can send one via. <a href="https://paypal.me/dsgriffin" target="blank">paypal.me/dsgriffin</a></p>
+          </div>
 
-            <h4>Uninstall NoComment</h4>
+          <h4>Uninstall NoComment</h4>
 
-            <div>
-              <p>If you would like to completely uninstall this extension, you can do so via.</p>
-              <ul>
-                <li>Navigating to the Extensions menu; either type <code>chrome://extensions</code> into the address bar or go
-                  to <code>Chrome Menu > Tools > Extensions</code>.</li>
-                <li>Click the recycle bin icon that is next to the NoComment extension.</li>
-              </ul>
-            </div>
+          <div>
+            <p>First, navigate to the Extensions menu; either type <code>chrome://extensions</code> into the address bar or go to <code>Chrome Menu > Tools > Extensions</code>.</p>
+            <p>Then, click the recycle bin icon that is next to the NoComment extension.</p>
           </div>
 
           <h4>Software Licensing/Code</h4>

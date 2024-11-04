@@ -21,10 +21,10 @@ $('#allowlist, #blocklist').DataTable({ 'scrollY': '200px', 'paging': false, 'jQ
 $('div.accordion').accordion({ heightStyle: 'content', collapsible: false });
 
 chrome.storage.sync.get({
-  'blockAllComments': true,
-  'display': 'collapse',
-  'allowlist': [],
-  'blocklist': []
+  blockAllComments: true,
+  display: 'collapse',
+  allowlist: [],
+  blocklist: []
 }, (optionsStorage: UserSettings): void => {
   // SET: Data of both lists + options panel settings.
   let allowlist = $('#allowlist').DataTable();
@@ -63,11 +63,11 @@ chrome.storage.local.get('currentTabIndex', function (obj) {
 $('#allowlist tbody, #blocklist tbody').on('click', 'tr', function () {
   $(this).toggleClass('selected');
   $('[data-list="modifySelected"][data-list-type=' + $(this).closest('table').attr('id') + ']').button('option', 'disabled', $(this).closest('table').find('.selected').length !== 1);
-  $('[data-list="removeSelected"][data-list-type=' + $(this).closest('table').attr('id') + ']').button('option', 'disabled', $(this).closest('table').find('.selected').length < 1);
+  $('[data-list="removeSelected"][data-list-type=' + $(this).closest('table').attr('id') + ']').button('option', 'disabled', $(this).closest('table').find('.selected').length !== 1);
 });
 
 // SET: When the user saves their general settings, send these settings off to storage for later retrieval.
-$('#saveSettings').click(function () {
+$('#saveSettings').on('click', function () {
   chrome.storage.sync.set({
     'blockAllComments': $('#radio1').prop('checked'),
     'display': $('#visualDisplay').val()
@@ -81,7 +81,7 @@ $('#saveSettings').click(function () {
 });
 
 // SET: When the user saves their Allow List, send these settings off to storage for later retrieval.
-$('#saveAllowList').click(function () {
+$('#saveAllowList').on('click', function () {
   const allowlist = [];
 
   $('#allowlist').DataTable().rows().data().each(function (value, index) {
@@ -97,7 +97,7 @@ $('#saveAllowList').click(function () {
 });
 
 // SET: When the user saves their Block List, send these settings off to storage for later retrieval.
-$('#saveBlockList').click(function () {
+$('#saveBlockList').on('click', function () {
   const blocklist = [];
 
   $('#blocklist').DataTable().rows().data().each(function (value, index) {
@@ -113,7 +113,7 @@ $('#saveBlockList').click(function () {
 });
 
 // SET: When the user saves a new list entry, process this.
-$('[data-list="addNew"]').click(function () {
+$('[data-list="addNew"]').on('click', function () {
   const listType = ($(this).data('listType') === 'allowlist') ? 'Allow List' : 'Block List';
 
   $('<div></div>')
@@ -142,7 +142,7 @@ $('[data-list="addNew"]').click(function () {
 });
 
 // SET: When the user modifies a list entry, process this.
-$('[data-list="modifySelected"]').click(function () {
+$('[data-list="modifySelected"]').on('click', function () {
   const listType = ($(this).data('listType') === 'allowlist') ? 'Allow List' : 'Block List';
 
   let selectedRow = $('#' + listType.replace(/\s/g, '').toLowerCase()).DataTable().row('tr.selected:first');
@@ -171,7 +171,7 @@ $('[data-list="modifySelected"]').click(function () {
 });
 
 // SET: When the user deletes a list entry/entries, process this.
-$('[data-list="removeSelected"]').click(function () {
+$('[data-list="removeSelected"]').on('click', function () {
   const listType = ($(this).data('listType') === 'allowlist') ? 'Allow List' : 'Block List';
 
   let selectedRows = $('#' + listType.replace(/\s/g, '').toLowerCase()).DataTable().rows('tr.selected');
@@ -199,7 +199,7 @@ $('[data-list="removeSelected"]').click(function () {
 });
 
 // SET: When the user removes all list entries, process this.
-$('[data-list="removeAll"]').click(function () {
+$('[data-list="removeAll"]').on('click', function () {
   const listType = ($(this).data('listType') === 'allowlist') ? 'Allow List' : 'Block List';
 
   let allRows = $('#' + listType.replace(/\s/g, '').toLowerCase()).DataTable().rows();
