@@ -1,18 +1,20 @@
-import {UserSettings, CommentHandling, UrlHandling, DynamicContentHandling} from './interfaces';
+import { UserSettings, CommentHandling, UrlHandling, DynamicContentHandling } from './interfaces';
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-
   // The selector array - this can be expanded to target comments/comment sections on as many sites as possible.
-  const selectorArray: ReadonlyArray<string> = ['body [id*="comment"]', 'body [class*="comment"]', '#disqus_thread', '[class*="replies-to"]'];
+  const selectorArray: ReadonlyArray<string> = [
+    'body [id*="comment"]', 'body [class*="comment"]', '#disqus_thread', '[class*="replies-to"]',
+    'div[aria-label^="Comment by"]', '[data-testid="tweet"]:only-child'
+  ];
 
   // The current URL (for allowlist/blocklist usage)
   const currentURL: string = document.location.href;
 
   let userSettings: UserSettings = {
-    'blockAllComments': request.settings.blockComments,
-    'display': request.settings.visualDisplay,
-    'allowlist': request.allowlist,
-    'blocklist': request.blocklist
+    blockAllComments: request.blockAllComments,
+    display: request.display,
+    allowlist: request.allowlist,
+    blocklist: request.blocklist
   };
 
   let comments: CommentHandling = {
@@ -30,8 +32,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   };
 
   let urlHandling: UrlHandling = {
-    'blockableContent': false,
-    'checkProtocol': (urlString: string): string => {
+    blockableContent: false,
+    checkProtocol: (urlString: string): string => {
       if (urlString.search(/^http[s]?\:\/\//) === -1) {
         urlString = '*://' + urlString;
       }
@@ -119,5 +121,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
   }
   // Need to include whether or not the current page contains blockable content, so that the page action can be displayed.
-  sendResponse({ 'blockableContent': urlHandling.blockableContent, 'commentsLength': comments.getAll.length });
+  sendResponse({ 
+    'blockableContent': urlHandling.blockableContent, 
+    'commentsLength': comments.getAll.length 
+  });
 });

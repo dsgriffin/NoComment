@@ -1,10 +1,11 @@
-var path = require('path');
-var webpack = require('webpack');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  mode: 'production',
   entry: {
-    background: './app/scripts/background.ts',
+    service_worker: './app/scripts/service_worker.ts',
     content: './app/scripts/content.ts',
     options: './app/scripts/options.ts',
     popup: './app/scripts/popup.ts'
@@ -21,19 +22,21 @@ module.exports = {
     }
   },
   module: {
-    loaders: [
-      { test: /\.tsx?$/, loader: 'ts-loader' },
-      { test: /\.css$/, loader: "style-loader!css-loader" },
-      { test: /\.(jpe?g|gif|png)$/, loader: 'file-loader?emitFile=false&name=[path][name].[ext]' }
+    rules: [
+      { test: /\.tsx?$/, use: 'ts-loader' },
+      { test: /\.css$/, use: "style-loader!css-loader" },
+      { test: /\.(jpe?g|gif|png)$/, use: 'file-loader?emitFile=false&name=[path][name].[ext]' }
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([
-      { from: './app/images', to: path.resolve(__dirname, 'dist') },
-      { from: './app/styles', to: path.resolve(__dirname, 'dist') },
-      { from: './app/templates', to: path.resolve(__dirname, 'dist') },
-      { from: './app/manifest.json', to: path.resolve(__dirname, 'dist') }
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: './app/images', to: path.resolve(__dirname, 'dist') },
+        { from: './app/styles', to: path.resolve(__dirname, 'dist') },
+        { from: './app/templates', to: path.resolve(__dirname, 'dist') },
+        { from: './app/manifest.json', to: path.resolve(__dirname, 'dist') }
+      ]
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
