@@ -2,20 +2,31 @@
 
 ![](https://img.shields.io/badge/version-2.0.0-green.svg)
 
-A Chrome extension for hiding comment sections across the web (Social Media, News Articles, Blogs etc).
+NoComment is a simple Chrome extension for hiding user-generated comments on the web.
 
 # Features
-* Users can choose whether to `hide all` comments (except those on URLs/URL patterns specified in the Allow List) or `show all` by default (hiding only the URLs/URL patterns specified in the Block List). **Default**: `hide all`  
 
-* Users can select how they want this to visually look - either `collapsed` (`display: none`) which completely removes the space usually taken or `hidden` (`visibility: hidden`) which keeps the space the comment section would usually take up. **Default**: `collapsed`
+On a fresh installation, NoComment does not block any comments; if you'd like to block comments on specific websites/routes only, you can add those websites/routes to your "Blocklist".
 
-* An Allow List and Block List, where users can define URLs/URL patterns they want to allow or block respectively. **Default**: `empty lists`
+If you prefer to block comments on all sites by default, you can do that, and add websites/routes to your "Allowlist" instead.
 
-# Try it out
+You can even use the wildcard selector "*" to block or allow comments on specific "routes" of a website.
+
+Examples:
+
+www.youtube.com/*
+x.com/*/status/* 
+www.reddit.com/r/news/*
+
+The first example blocks/allows all YouTube videos, the second blocks/allows all X statuses, and the third specifically only blocks/allows comments on all Reddit posts in the r/news subreddit.
+
+You're also able to change the way the comments are hidden; by default they are "collapsed" and remove the space taken originally like they never existed, but this can be changed to "hidden" if you'd like to keep the empty space the comments originally took.
+
+# Chrome Web Store
 
 http://chrome.google.com/webstore/detail/nocomment/bcaffknecaohmingfdfimlbllnebpepe
 
-(Please feel free to rate/provide constructive feedback/share etc)
+Please feel free to rate & leave constructive feedback!
 
 # Build/Test
 
