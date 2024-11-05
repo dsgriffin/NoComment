@@ -14,9 +14,11 @@ You can even use the wildcard selector "*" to block or allow comments on specifi
 
 Examples:
 
-www.youtube.com/*
-x.com/*/status/* 
-www.reddit.com/r/news/*
+```www.youtube.com/*```
+
+```x.com/*/status/*```
+
+```www.reddit.com/r/news/*```
 
 The first example blocks/allows all YouTube videos, the second blocks/allows all X statuses, and the third specifically only blocks/allows comments on all Reddit posts in the r/news subreddit.
 
